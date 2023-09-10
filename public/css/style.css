@@ -1,0 +1,146 @@
+/* COLOR SCHEME */
+
+.blk-btm {
+    border-bottom: black solid 3px;
+}
+
+.blk-top {
+    border-top: black solid 2px;
+}
+
+.bg-green {
+    background-color: rgb(0, 147, 0);
+}
+
+.bg-blue {
+    background-color: rgb(87, 87, 255);
+}
+
+.border-green {
+    border: solid 1px rgb(0, 147, 0);
+}
+
+/* HEADER COMPONENTS */
+
+#header-logo {
+    margin-left:-30px;
+}
+
+#post-header-spacer {
+    height: 75px;
+}
+
+#logo-img {
+    position:absolute;
+    height: 125px;
+    width: auto;
+    margin-left: 30px;
+}
+
+#account-btns {
+    justify-content: end;
+}
+
+.btn-signup {
+    background-color: rgb(87, 87, 255);
+    height:30px;
+    width: 100px;
+    margin: 5px;
+    line-height:10px
+}
+
+.btn-login {
+    background-color: rgb(0, 147, 0);
+    height:30px;
+    width: 100px;
+    margin: 5px;
+    line-height:10px
+}
+
+#nav-links {
+    display: flex; 
+    justify-content: end;
+    margin-right: 49px;
+}
+
+#home-link {
+    color: rgb(0, 147, 0);
+}
+
+#home-link:hover {
+    color: rgb(0, 147, 0);
+    font-weight: bolder;
+    text-decoration: underline;
+    text-decoration-style: wavy; 
+    text-underline-position: under;
+}
+
+#dashboard-link {
+    color: rgb(87, 87, 255);
+}
+
+#dashboard-link:hover {
+    color: rgb(87, 87, 255);
+    font-weight: bolder;
+    text-decoration: underline;
+    text-decoration-style: wavy; 
+    text-underline-position: under; 
+}
+
+
+/* PRIMARY COMMENT BOX */
+
+#primary-comment-container {
+    background-color: rgb(245, 255, 245);
+    border: black 1pt solid;
+}
+
+
+/* Comment box buttons */
+
+#button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#recycle-icon-sm {
+    font-size: 0.8rem;
+}
+
+.thin-row-15 {
+    height: 15px
+}
+
+#comment-metadata {
+    font-size:small;
+}
+
+/* ADJUSTMENT FOR MIN SIZE SCREEN */
+
+@media screen and (max-width: 750px) {
+
+    #account-btns {
+        justify-content: left;
+    }
+
+    .btn-signup {
+        margin-left:136px;
+    }
+
+    .logo-img {
+        margin-left: 0px;
+    }
+
+    #nav-links {
+        display: flex; 
+        margin-top: 55px;
+        justify-content: start;
+        margin-left: 155px;
+    }
+
+    #post-header-spacer {
+        height: 10px;
+    }
+}
+  
