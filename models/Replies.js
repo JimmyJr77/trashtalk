@@ -13,9 +13,10 @@ Reply.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    content: {
+    replies_content: {
       type: DataTypes.TEXT,
       allowNull: false,
+      defaultValue: '',
     },
     user_id: {
         type: DataTypes.INTEGER,
@@ -40,20 +41,5 @@ Reply.init(
     modelName: 'replies',
   }
 );
-
-// Define the relationships between User, Post, and Reply
-User.hasMany(Reply, {
-  foreignKey: 'user_id',
-});
-Reply.belongsTo(User, {
-  foreignKey: 'user_id',
-});
-
-Post.hasMany(Reply, {
-  foreignKey: 'post_id',
-});
-Reply.belongsTo(Post, {
-  foreignKey: 'post_id',
-});
 
 module.exports = Reply;

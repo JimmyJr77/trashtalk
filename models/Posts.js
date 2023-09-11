@@ -19,14 +19,15 @@ Post.init(
     post_content: {
       type: DataTypes.TEXT,
       allowNull: false,
+      defaultValue: '',
     },
     user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "users",
-          key: "id",
-        },
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'users',
+        key: 'id',
+      },
     },
   },
   {
@@ -36,12 +37,5 @@ Post.init(
   }
 );
 
-// Define the relationship between User and Post
-User.hasMany(Post, {
-  foreignKey: 'user_id',
-});
-Post.belongsTo(User, {
-  foreignKey: 'user_id',
-});
-
 module.exports = Post;
+
