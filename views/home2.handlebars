@@ -1,0 +1,80 @@
+<main class="container mt-5">
+    <button type="button" class="btn btn-sm mb-2 btn-primary">
+        <i class="bi bi-plus"></i> New Comment
+    </button>
+
+    <!-- Trash Bins -->
+    <section id="primary-comment-container">
+        {{#each posts as |post|}}
+            <div class="primary-comment-container">
+                <div class="d-flex justify-content-between bg-green text-white" style="height: 25px;">
+                    <p id="username" class="d-flex px-2 font-weight-bold">{{User.username}}</p>
+                    <p class="d-flex px-2 font-weight-bold"></p>
+                </div>
+                <h3 id="title" class="p-2">{{tool.title}}</h3>
+                <div class="bg-white rounded p-2 mb-2 mx-2 border-green row">
+                    <div class="col-11">
+                        <span id="primary-comment">{{post_content}}</span>
+                    </div>
+                    <div class="col-1"> 
+                        <div id="button-container">
+                            <button type="button" id="reply-icon-sm" class="btn btn-sm btn-primary mt-1">
+                                <i class="bi bi-plus"></i>
+                            </button>
+                            <button type="button" id="recycle-icon-sm" class="btn btn-sm btn-primary mt-1">
+                                <i class="fas fa-recycle"></i>
+                            </button>
+                            <button type="button" id="edit-icon-sm" class="btn btn-sm btn-warning mt-1 ">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button type="button" id="delete-icon-sm" class="btn btn-sm btn-danger mt-1 ">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-12 d-flex justify-content-between align-items-bottom thin-row-15">
+                    <p id="comment-metadata" class="text-muted"></p>
+                    <p id="comment-metadata" class="text-muted">{{createdAt}}</p>
+                </div>
+
+                <div class="col-12 d-flex justify-content-center align-items-center thin-row-15" onclick="toggleDropdown(this)">
+                    <i class="bi bi-caret-down-fill"></i>
+                </div>
+                {{!-- {{ #each posts }}
+                    {{ #if currentDropdown }}
+                        {{> replies }}
+                    {{ /if }}
+                {{ /each }} --}}
+
+                {{!-- <!-- TOOL BOX DROP DOWN -->
+                {{#each posts.replies}}
+                    <div class="comments-dropdown d-none">
+                        <div style="height:30px;"></div>
+                        <div class="container">
+                            <span class="likes-count">120</span>
+                            <span class="star-outline ml-2" onclick="toggleStar(this)" data-id="comment1">&#9734;</span>
+                            <span class="username ml-2 font-weight-bold">{{User.username}}:</span>
+                        </div>
+                        <!-- Comment -->
+                        <div class="bg-white rounded p-2 m-2 border border-primary">
+                            <span class="comment-text ml-2">{{replies_content}}</span>
+                        </div>
+                        <div class="col-12 d-flex justify-content-between align-items-bottom thin-row-15">
+                            <p id="comment-metadata" class="text-muted"></p>
+                            <p id="comment-metadata" class="text-muted">{{createdAt}}</p>
+                        </div>
+                        <!-- Close Comments Arrow -->
+                        <div class="col-12 d-flex justify-content-center align-items-center thin-row-15" onclick="toggleDropdown(this)">
+                            <i class="bi bi-caret-up-fill"></i>
+                        </div>
+                    </div>
+                {{/each}} --}}
+            </div>
+        {{/each}}
+    </section>
+
+    <div style="height:30px;"></div>
+</main>
+<div style="height:30px;"></div>

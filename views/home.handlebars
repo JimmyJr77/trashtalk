@@ -1,0 +1,9 @@
+{{!-- Debug: Show the posts data --}}
+<pre>{{JSON.stringify posts}}</pre>
+
+{{#each posts}}
+<div>
+  Post ID: {{id}}
+  Post Title: {{title}}
+</div>
+{{/each}}
