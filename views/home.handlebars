@@ -1,13 +1,9 @@
 {{#each posts}}
     <div>
-    <p>Post ID: {{id}}</p>
-    <p>Post Title: {{title}}</p>
+        <p>Post ID: {{dataValues.id}}</p>
+        <p>Post Title: {{dataValues.title}}</p>
+        <p>Post: {{dataValues.post_content}}</p>
+        <p>Author: {{dataValues.User.dataValues.username}}</p>
     </div>
 {{/each}}
 
-{{#each posts as |post|}}
-    <div>
-    <p>Post ID: {{post.id}}</p>
-    <p>Post Title: {{post.title}}</p>
-    </div>
-{{/each}}
