@@ -1,9 +1,13 @@
-{{!-- Debug: Show the posts data --}}
-<pre>{{JSON.stringify posts}}</pre>
-
 {{#each posts}}
-<div>
-  Post ID: {{id}}
-  Post Title: {{title}}
-</div>
+    <div>
+    <p>Post ID: {{id}}</p>
+    <p>Post Title: {{title}}</p>
+    </div>
+{{/each}}
+
+{{#each posts as |post|}}
+    <div>
+    <p>Post ID: {{post.id}}</p>
+    <p>Post Title: {{post.title}}</p>
+    </div>
 {{/each}}
