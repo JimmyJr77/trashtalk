@@ -6,7 +6,7 @@ const userRoutes = require('./user-routes.js');
 
 router.use('/postroute', postRoutes);
 router.use('/userroute', userRoutes);
-// router.use('/posts', postRoutes);
+router.use('/posts', postRoutes);
 // router.use('/users', userRoutes);
 // router.use('/replies', replyRoutes);
 

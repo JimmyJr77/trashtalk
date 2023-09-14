@@ -1,0 +1,23 @@
+{{#each posts}}
+    <div> POSTS
+        <p>Post ID: {{id}}</p>
+        <p>Post Title: {{title}}</p>
+        <p>Post: {{post_content}}</p>
+        <p>Updated Date: {{updatedAt}}</p>
+        <p>Created Date: {{createdAt}}</p>                 
+        <p>Post Author: {{user.username}}</p>
+        <p>Post Author ID: {{user_id}}</p>
+    </div>
+    <div>.........................................</div>
+    <div> REPLIES
+    {{#each replies}}
+        <p>Reply: {{replies_content}}</p>
+        <p>Reply Date: {{updated_at}}</p>    
+        <p>Reply Author: {{user.username}}</p> 
+        <p>Reply ID: {{user_id}}</p>       
+    {{/each}}
+    </div>
+    <div>_______________________________________________________________________________________________________.</div>
+{{/each}}
+
+
