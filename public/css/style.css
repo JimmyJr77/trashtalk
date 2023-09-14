@@ -1,10 +1,14 @@
 /* COLOR SCHEME */
 
-.blk-btm {
+.border-green {
+    border: solid 1px rgb(0, 147, 0);
+}
+
+.btm-black {
     border-bottom: black solid 3px;
 }
 
-.blk-top {
+.top-black {
     border-top: black solid 2px;
 }
 
@@ -16,9 +20,10 @@
     background-color: rgb(87, 87, 255);
 }
 
-.border-green {
-    border: solid 1px rgb(0, 147, 0);
+.bg-dark-grey {
+    background-color: rgb(60, 60, 60);
 }
+
 
 /* HEADER COMPONENTS */
 
@@ -44,7 +49,6 @@
 }
 
 .btn-signup {
-    background-color: rgb(87, 87, 255);
     height:30px;
     width: 100px;
     margin: 5px;
@@ -52,7 +56,6 @@
 }
 
 .btn-login {
-    background-color: rgb(87, 87, 255);
     height:30px;
     width: 100px;
     margin: 5px;

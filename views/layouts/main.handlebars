@@ -22,14 +22,14 @@
             <img src="/images/trashtalk-logo-lower.png" alt="Trash Talk Logo" id="logo-img">
         </div>
         {{#if loggedIn}}
-        <div id="account-btns" class="blk-top bg-warning blk-btm d-flex">
+        <div id="account-btns" class="top-black bg-warning btm-black d-flex">
             <button class="btn btn-logout">Logout</button>
             <button id="btn-signup" class="btn btn-signup  btn-center-text text-white" data-toggle="modal" data-target="#signupModal">Sign Up</button>
         {{else}}
-        <div id="account-btns" class="blk-top bg-warning blk-btm d-flex">
-            <button id="btn-login" class="btn btn-login btn-center-text text-white" data-toggle="modal" data-target="#loginModal">Login</button>
-            <button id="btn-signup" class="btn btn-signup  btn-center-text text-white mr-5" data-toggle="modal" data-target="#signupModal">Sign Up</button>
-        </div>
+        <div id="account-btns" class="top-black bg-warning btm-black d-flex">
+            <button id="btn-login" class="btn btn-login btn-center-text btn-primary text-white" data-toggle="modal" data-target="#loginModal">Login</button>
+            <button id="btn-signup" class="btn btn-signup  btn-center-text btn-primary text-white mr-5" data-toggle="modal" data-target="#signupModal">Sign Up</button>
+        </div> 
         {{/if}}
         <div id="nav-links">
             <a id="home-link" href="#" src="#" alt="" class="mr-1">Home</a>
@@ -46,7 +46,7 @@
     
     <footer class="fixed-bottom">
         <section>
-            <div id="primary-nav" class="blk-top bg-warning d-flex justify-content-between">
+            <div id="primary-nav" class="top-black bg-warning d-flex justify-content-between">
                 <div class="text-white ml-4">&copy; Jimmy O'Brien 2023</div>
                 <div class="mr-4">
                     <a href="#" class="mr-4 text-white">About Us</a>
