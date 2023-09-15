@@ -32,3 +32,5 @@ module.exports = sequelize;
 // );
 
 module.exports = sequelize;
+
+// ai application 
