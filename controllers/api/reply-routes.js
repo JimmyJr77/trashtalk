@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Reply } = require('../../models');
 
+// Route to retrieve replies to posts
 router.get('/', async (req, res) => {
     try {
         const replyData = await Reply.findAll();

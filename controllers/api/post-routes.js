@@ -5,7 +5,7 @@ const { Post } = require('../../models');
 // Route to retrieve posts and their associated replies with usernames
 router.get('/', async (req, res) => {
   try {
-    // Fetch posts from the database along with their authors' usernames and replies
+    // Fetch posts from the database
     const postData = await Post.findAll();
     const posts = postData.map((post) => post.get({ plain: true }));
     res.json(posts);

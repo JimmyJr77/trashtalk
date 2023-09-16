@@ -29,7 +29,15 @@ Users.init(
         username: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true,
+            isUnique: true,
+        },
+        email: {
+            type: DataTypes.STRING,
+            isUnique :true,
+            allowNull:false,
+            validate:{
+                isEmail : true
+            }
         },
         password: {
             type: DataTypes.STRING,
@@ -42,6 +50,10 @@ Users.init(
     {
         hooks: {
         beforeCreate: (user) => {
+            user.password = bcrypt.hashSync(user.password, 10);
+            return user;
+        },
+        beforeUpdate: (user) => {
             user.password = bcrypt.hashSync(user.password, 10);
             return user;
         }
