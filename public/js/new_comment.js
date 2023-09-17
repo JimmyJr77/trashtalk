@@ -1,8 +1,8 @@
 $(document).ready(function() {
-
     $("#newCommentButton").click(function() {
         $("#commentFormContainer").html(`
             <form id="commentForm">
+                <input type="text" name="title" placeholder="Title" required>
                 <textarea name="post_content" placeholder="Your comment" required></textarea>
                 <button type="submit">Post Comment</button>
             </form>
@@ -12,12 +12,14 @@ $(document).ready(function() {
     $("#commentFormContainer").on('submit', '#commentForm', function(e) {
         e.preventDefault();
 
+        const title = $(this).find('input[name="title"]').val();
         const postContent = $(this).find('textarea[name="post_content"]').val();
 
         $.ajax({
             type: "POST",
             url: "/api/posts",
             data: {
+                title: title,
                 post_content: postContent,
             },
             success: function(response) {

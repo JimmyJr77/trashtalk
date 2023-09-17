@@ -1,5 +1,5 @@
 const withAuth = (req, res, next) => {
-  if (!req.session.logged_in) {
+  if (!req.session.loggedIn) {
       return res.status(401).json({ error: 'Not authenticated' }); 
   }
   next();
