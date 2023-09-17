@@ -19,6 +19,7 @@ router.post('/login', async (req, res) => {
         const user = await Users.findOne({ where: { username: req.body.username } });
         
         if (!user) {
+            // console.log("DEBUG: No user found with that username."); // to debug log
             res.status(400).json({ message: 'No user found with that username.' });
             return;
         }
@@ -39,6 +40,7 @@ router.post('/login', async (req, res) => {
         });
 
     } catch (err) {
+        // console.error("DEBUG: Server error", err);  // to debug log
         res.status(500).json(err);
     }
 });

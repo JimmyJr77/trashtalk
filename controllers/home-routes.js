@@ -3,7 +3,7 @@ const { Post, User, Reply } = require('../models');
 
 router.get('/', async (req, res) => {
   try {
-    // Fetch posts from the database along with their authors' usernames and replies
+    // Fetches posts from the database along with author usernames and replies
     const postData = await Post.findAll({
       include: [
         {
@@ -23,12 +23,15 @@ router.get('/', async (req, res) => {
       ],
     });
 
-    // Serialize the data (flatten it) for better use in your template
+    // Serialize the data (flatten it) for better use in the template
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    // Send over the serialized data to the 'home' template
-    // loggedIn: req.session.loggedIn,
-    res.render('home', { posts });
+    // Send serialized data to the 'home' template
+    res.render('home', { 
+      posts,
+      loggedIn: req.session.loggedIn, 
+      username: req.session.username 
+    });
     console.log(posts);
   } catch (err) {
     res.status(500).json(err);
