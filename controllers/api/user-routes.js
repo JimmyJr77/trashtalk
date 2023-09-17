@@ -14,20 +14,26 @@ router.get('/', async (req, res) => {
     }
   });
 
-router.post('/login', async (req, res) => {
+  router.post('/login', async (req, res) => {
     try {
-        const user = await Users.findOne({ where: { username: req.body.username } });
-        
-        if (!user) {
-            // console.log("DEBUG: No user found with that username."); // to debug log
-            res.status(400).json({ message: 'No user found with that username.' });
+        const { username, password } = req.body;
+
+        if (!username) {
+            res.status(400).json({ message: 'Username is required for login.' });
             return;
         }
 
-        const validPassword = user.checkPassword(req.body.password);
+        const user = await Users.findOne({ where: { username } });
+
+        if (!user) {
+            res.status(404).json({ message: 'No user found with that username.' });
+            return;
+        }
+
+        const validPassword = user.checkPassword(password);
 
         if (!validPassword) {
-            res.status(400).json({ message: 'Incorrect password!' });
+            res.status(401).json({ message: 'Incorrect password!' });
             return;
         }
 
@@ -44,6 +50,7 @@ router.post('/login', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
 
 
 router.post('/logout', (req, res) => {

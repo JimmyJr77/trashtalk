@@ -1,29 +1,27 @@
 const express = require('express');
 const router = express.Router();
 const { Post } = require('../../models');
+const withAuth = require('../../utils/auth');
 
-// Route to retrieve posts and their associated replies with usernames
+// Route to retrieve all posts 
 router.get('/', async (req, res) => {
-  try {
-    // Fetch posts from the database
-    const postData = await Post.findAll();
-    const posts = postData.map((post) => post.get({ plain: true }));
-    res.json(posts);
-    // console.log(posts);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+    try {
+        // Fetch posts from the database
+        const postData = await Post.findAll();
+        const posts = postData.map((post) => post.get({ plain: true }));
+        res.json(posts);
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
-
-// Route to create a new post
-router.post('/', async (req, res) => {
+// Route to create a new post with authentication
+router.post('/', withAuth, async (req, res) => {
     try {
         const newPost = await Post.create({
             title: req.body.title,
             post_content: req.body.post_content,
-            user_id: req.body.user_id //for testing purposes
-            // user_id: req.session.userId, // Assuming you have user authentication
+            user_id: req.session.userId, // Uses the user id from session
         });
         res.status(201).json(newPost);
     } catch (err) {
@@ -32,9 +30,8 @@ router.post('/', async (req, res) => {
     }
 });
 
-
 // Route to update a post
-router.put('/:id', async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
     try {
         const updatedPost = await Post.update(
             {
@@ -44,7 +41,7 @@ router.put('/:id', async (req, res) => {
             {
                 where: {
                     id: req.params.id,
-                    // user_id: req.session.userId, // Ensure the user owns the post
+                    user_id: req.session.userId, // Uses the user id from session
                 },
             }
         );
@@ -61,12 +58,12 @@ router.put('/:id', async (req, res) => {
 });
 
 // Route to delete a post
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
     try {
         const deletedPost = await Post.destroy({
             where: {
                 id: req.params.id,
-                // user_id: req.session.userId, // Ensure the user owns the post
+                user_id: req.session.userId, // Use the user id from session
             },
         });
 
@@ -80,22 +77,5 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({ error: 'Failed to delete the post' });
     }
 });
-
-// // Route to create a new reply for a post
-// router.post('/:post_id/replies', async (req, res) => {
-//     // console.log(req.body);   
-//     try {
-//         const newReply = await Reply.create({
-//             replies_content: req.body.replies_content,
-//             post_id: req.params.post_id,
-//             user_id: req.body.user_id
-//         });
-
-//         res.status(201).json(newReply);
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).json({ error: 'Failed to create a new reply' });
-//     }
-// });
 
 module.exports = router;
