@@ -20,8 +20,8 @@ router.post('/:post_id', async (req, res) => {
     try {
         const newReply = await Reply.create({
             replies_content: req.body.replies_content,
-            user_id: req.body.user_id,
-            // user_id: req.session.userId, // Assuming you have user authentication
+            // user_id: req.body.user_id, // For testing
+            user_id: req.session.userId,
             post_id: req.params.post_id
         });
         res.status(201).json(newReply);
@@ -40,8 +40,8 @@ router.put('/:id', async (req, res) => {
             },
             {
                 where: {
-                    id: req.params.id,
-                    // user_id: req.session.userId, // Ensure the user owns the post
+                    // id: req.params.id, // For testing
+                    user_id: req.session.userId, // Ensure the user owns the post
                 },
             }
         );
@@ -63,7 +63,7 @@ router.delete('/:id', async (req, res) => {
         const deletedReply = await Reply.destroy({
             where: {
                 id: req.params.id,
-                // user_id: req.session.userId, // Ensure the user owns the reply
+                user_id: req.session.userId, // Ensure the user owns the reply
             },
         });
 

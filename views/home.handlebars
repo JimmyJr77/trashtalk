@@ -1,13 +1,26 @@
-{{!-- <main class="container mt-5">
-    <button type="button" class="btn btn-sm mb-2 btn-primary">
-        <i class="bi bi-plus"></i> New Comment
-    </button> --}}
 
-    <main class="container mt-5">
-    <button type="button" id="newCommentButton" class="btn btn-sm mb-2 btn-primary">
-        <i class="bi bi-plus"></i> New Comment
+<main class="container mt-5">
+
+    <button type="button" id="newPostButton" class="btn btn-sm mb-2 btn-primary">
+        <i class="bi bi-plus"></i> New Post
     </button>
-    <div id="commentFormContainer" class="container mt-5"></div>
+    <div id="postFormContainer">
+        <form id="postForm" style="display:none">
+            <input type="text" id="title" name="title" class="form-control border-green mb-2" placeholder="Enter the title" required>
+            <textarea id="post_content" name="post_content" class="form-control border-green mb-2" rows="3" placeholder="Your comment" required></textarea>
+            
+            <!-- The submit button -->
+            <button type="submit" class="btn btn-sm btn-success mb-4">
+                Submit Post
+            </button>
+            
+            <!-- The cancel button -->
+            <button type="button" id="cancelButton" class="btn btn-sm btn-danger mb-4">
+                Cancel
+            </button>
+        </form>
+    </div>
+
 
     <!-- Trash Bins -->
 {{#each posts}}
@@ -18,33 +31,48 @@
                 <p class="d-flex px-2 font-weight-bold"></p>
             </div>
             <h3 id="title" class="p-2">{{title}}</h3>
-            <div class="bg-white rounded pl-1 pr-2 pb-1 mb-2 mx-2 border-green row">
+            <div class="bg-white rounded pl-1 pr-2 pb-1 mb-2 mx-2 border-green row" style="height:106px;">
                 <div class="col-11">
                     <span id="primary-comment">{{post_content}}</span>
                 </div>
                 <div class="col-1"> 
-                    <div id="button-container">
+                    <div id="button-container justify-contents-right">
                         {{!-- <button type="button" id="reply-icon-sm" class="btn btn-sm btn-primary mt-1">
                             <i class="bi bi-plus"></i>
                         </button> --}}
-                        <button type="button" id="recycle-icon-sm" class="btn btn-sm btn-primary mt-1">
-                            <i class="fas fa-recycle"></i>
+                        <button type="button" class="btn btn-sm btn-primary recycle-btn mt-1" data-post-id="{{this.id}}">
+                             <i class="fas fa-recycle"></i>
                         </button>
-                        <button type="button" id="edit-icon-sm" class="btn btn-sm btn-warning mt-1 ">
+                        <button type="button" id="edit-btn" class="btn btn-sm btn-warning mt-1 ">
                             <i class="bi bi-pencil"></i>
                         </button>
-                        <button type="button" id="delete-icon-sm" class="btn btn-sm btn-danger mt-1 ">
+                        <button type="button" id="delete-btn" class="btn btn-sm btn-danger mt-1 ">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>
                 </div>
             </div>
             
+            <div class="commentFormContainer">
+                <form class="commentForm" style="display:none">
+                    <textarea name="comment_content" class="form-control border-default mb-2" rows="3" placeholder="Your comment" required></textarea>
+                    
+                    <!-- The submit button -->
+                    <button type="submit" class="btn btn-sm btn-success mb-4">
+                        Submit Comment
+                    </button>
+                    
+                    <!-- The cancel button -->
+                    <button type="button" class="btn btn-sm btn-danger cancelButton mb-4">
+                        Cancel
+                    </button>
+                </form>
+            </div>
+
             <div class="col-12 d-flex justify-content-between align-items-bottom thin-row-15">
                 <p id="comment-metadata" class="text-muted"></p>
                 <p id="comment-metadata" class="text-muted">{{formatDate updatedAt}}</p>
             </div>
-
             <div class="col-12 d-flex justify-content-center align-items-center thin-row-15" onclick="toggleDropdown(this)">
                 <i class="bi bi-caret-down-fill"></i>
             </div>
@@ -76,6 +104,7 @@
             {{/each}}
         </div>
     </section>
+
     <div style="height:30px;"></div>    
 {{/each}}
 </main>
