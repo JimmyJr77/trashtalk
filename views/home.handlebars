@@ -1,6 +1,6 @@
 
 <main class="container mt-5">
-
+    
     <button type="button" id="newPostButton" class="btn btn-sm mb-2 btn-primary">
         <i class="bi bi-plus"></i> New Post
     </button>
@@ -22,43 +22,45 @@
     </div>
 
 
-    <!-- Trash Bins -->
+<!-- POSTS -->
 {{#each posts}}
-    <section id="primary-comment-container">
+    <section id="primary-comment-container">  
         <div class="primary-comment-container">
             <div class="d-flex justify-content-between bg-dark-grey text-white" style="height: 25px;">
                 <p id="username" class="d-flex px-2 font-weight-bold">{{user.username}}</p>
                 <p class="d-flex px-2 font-weight-bold"></p>
             </div>
             <h3 id="title" class="p-2">{{title}}</h3>
-            <div class="bg-white rounded pl-1 pr-2 pb-1 mb-2 mx-2 border-green row" style="height:106px;">
+            <div class="bg-white rounded pl-1 pb-1 mb-2 mx-2 border-green row" style="height:106px;">
                 <div class="col-11">
                     <span id="primary-comment">{{post_content}}</span>
-                </div>
-                <div class="col-1"> 
-                    <div id="button-container justify-contents-right">
+                </div>                
+                <div class="col-1 d-flex justify-content-end"> 
+                    <div id="button-container">
                         {{!-- <button type="button" id="reply-icon-sm" class="btn btn-sm btn-primary mt-1">
                             <i class="bi bi-plus"></i>
                         </button> --}}
                         <button type="button" class="btn btn-sm btn-primary recycle-btn mt-1" data-post-id="{{this.id}}">
                              <i class="fas fa-recycle"></i>
                         </button>
-                        <button type="button" id="edit-btn" class="btn btn-sm btn-warning mt-1 ">
-                            <i class="bi bi-pencil"></i>
-                        </button>
-                        <button type="button" id="delete-btn" class="btn btn-sm btn-danger mt-1 ">
-                            <i class="bi bi-trash"></i>
-                        </button>
+                        {{#if (eq ../userId user_id)}}
+                            <button type="button" id="edit-btn" class="btn btn-sm btn-warning mt-1" data-put-id="{{this.id}}">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button type="button" id="delete-btn" class="btn btn-sm btn-danger mt-1" data-delete-id="{{this.id}}">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        {{/if}}
                     </div>
                 </div>
             </div>
             
-            <div class="commentFormContainer">
+            <div class="commentFormContainer container-5 pr-3">
                 <form class="commentForm" style="display:none">
-                    <textarea name="comment_content" class="form-control border-default mb-2" rows="3" placeholder="Your comment" required></textarea>
+                    <textarea name="comment_content" class="form-control bg-white rounded px-3 border border-primary m-2" rows="3" placeholder="Your comment" required></textarea>
                     
                     <!-- The submit button -->
-                    <button type="submit" class="btn btn-sm btn-success mb-4">
+                    <button type="submit" class="btn btn-sm btn-success mb-4 mx-2">
                         Submit Comment
                     </button>
                     
@@ -78,33 +80,13 @@
             </div>
 
 
-            <!-- TOOL BOX DROP DOWN -->
+            <!-- REPLIES DROP DOWN -->
             {{#each replies}}
-                <div class="comments-dropdown d-none">
-                    <div style="height:30px;"></div>
-                    <div class="container">
-                        <span class="likes-count">120</span>
-                        <span class="star-outline ml-2" onclick="toggleStar(this)" data-id="comment1">&#9734;</span>
-                        <span class="username ml-2 font-weight-bold">{{user.username}}:</span>
-                    </div>
-                    <!-- Comment -->
-                    <div class="bg-white rounded p-2 m-2 border border-primary">
-                        <span class="comment-text ml-2">{{replies_content}}</span>
-                    </div>
-                    <div class="col-12 d-flex justify-content-between align-items-bottom thin-row-15">
-                        <p id="comment-metadata" class="text-muted"></p>
-                        <p id="comment-metadata" class="text-muted">{{formatDate updated_at}}</p>
-                    </div>
-                    <!-- Close Comments Arrow -->
-                    <div class="col-12 d-flex justify-content-center align-items-center thin-row-15" onclick="toggleDropdown(this)">
-                        <i class="bi bi-caret-up-fill"></i>
-                    </div>
-                    <div class="thin-row-15"></div>
-                </div>
+               {{> repliesPartial userId=../../userId}}
             {{/each}}
+            
         </div>
     </section>
-
     <div style="height:30px;"></div>    
 {{/each}}
 </main>

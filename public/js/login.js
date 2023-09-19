@@ -25,7 +25,7 @@ async function handleLogin(event) {
         });
 
         if (response.ok) {
-            const { userId, username, message } = await response.json();
+            const { username, message } = await response.json();
             alert(message); // Shows a temporary alert to the user about successful login.
             
             // Updates the UI elements to reflect the logged-in state

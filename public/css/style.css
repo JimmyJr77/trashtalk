@@ -41,26 +41,37 @@
     position:absolute;
     height: 125px;
     width: auto;
-    margin-left: 30px;
+    margin-left:40px;
+}
+
+#logged-in-name {
+    position:absolute;
+    margin-top:20px;
+    margin-left:150px;
+    font-weight: bolder;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+
 }
 
 #account-btns {
     justify-content: end;
+    height:45px;
 }
 
-.btn-signup {
+#btn-signup-narrow-screen {
+    display:none;
     height:30px;
     width: 100px;
     margin: 5px;
     line-height:10px
-}
+ }
 
-.btn-login {
+ #btn-signup-wide-screen {
     height:30px;
     width: 100px;
     margin: 5px;
     line-height:10px
-}
+ }
 
 #nav-links {
     display: flex; 
@@ -68,11 +79,7 @@
     margin-right: 49px;
 }
 
-#home-link {
-    color: rgb(0, 147, 0);
-}
-
-#home-link:hover {
+.nav-btn:hover {
     color: rgb(0, 147, 0);
     font-weight: bolder;
     text-decoration: underline;
@@ -80,18 +87,18 @@
     text-underline-position: under;
 }
 
-#dashboard-link {
-    color: rgb(0, 147, 0);
+.nav-btn {
+    height:30px;
+    width: 100px;
+    margin: 5px;
+    line-height:10px
 }
 
-#dashboard-link:hover {
-    color: rgb(0, 147, 0);
-    font-weight: bolder;
-    text-decoration: underline;
-    text-decoration-style: wavy; 
-    text-underline-position: under; 
-}
-
+#newPostButton {
+    display:flex;
+    height:30px;
+    width: 100px;
+ }
 
 /* PRIMARY COMMENT BOX */
 
@@ -100,16 +107,20 @@
     border: black 1pt solid;
 }
 
+.col-1 {
+    padding-right: 0;
+    margin-left: -6px;
+}
 
 /* Comment box buttons */
 
 #button-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: start;
 }
 
-.recycle-icon-sm {
+.recycle-btn {
     font-size: 0.8rem;
 }
 
@@ -123,29 +134,29 @@
 
 /* ADJUSTMENT FOR MIN SIZE SCREEN */
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 800px) {
 
-    #account-btns {
-        justify-content: left;
+    #btn-signup-wide-screen {
+       display:none;
     }
 
-    .btn-login {
-        margin-left:136px;
-    }
-
-    .logo-img {
-        margin-left: 0px;
-    }
+    #btn-signup-narrow-screen {
+        display:flex;
+        height:30px;
+        width: 100px;
+        font-size: small;
+        justify-content: center;
+        align-items: center;
+     }
 
     #nav-links {
-        display: flex; 
-        margin-top: 55px;
-        justify-content: start;
-        margin-left: 155px;
+        margin-top: 75px;
+        justify-content: left;
+        margin-left:10px; 
     }
 
     #post-header-spacer {
-        height: 10px;
+        height: 0px;
     }
 }
   

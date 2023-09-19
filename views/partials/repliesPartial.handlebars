@@ -1,0 +1,40 @@
+{{!-- <div>test
+    <div style="height: 100px;">user_id for the comment author: {{user_id}} </div>
+    <div style="height: 100px;">userID for who is logged in: {{userId}} </div>
+</div> --}}
+
+<div class="comments-dropdown d-none">
+    <div style="height:30px;"></div>
+    <div class="container">
+        <span class="likes-count">120</span> 
+        <span class="star-outline ml-2" onclick="toggleStar(this)" data-id="{{id}}">&#9734;</span>
+        <span class="username ml-2 font-weight-bold">{{user.username}}:</span>
+    </div>
+    <!-- Comment -->
+    <div class="bg-white rounded py-1 m-2 border border-primary row">
+        <div class="col-11">
+            <span class="comment-text ml-2">{{replies_content}}</span>
+        </div>
+        <div class="col-1 d-flex justify-content-end"> 
+            <div id="button-container">
+                {{#if (eq userId user_id)}}
+                    <button type="button" id="edit-btn" class="btn btn-sm btn-warning mt-1" data-put-id="{{this.id}}">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button type="button" id="delete-btn" class="btn btn-sm btn-danger mt-1" data-delete-id="{{this.id}}">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    <div class="col-12 d-flex justify-content-between align-items-bottom thin-row-15">
+        <p id="comment-metadata" class="text-muted"></p>
+        <p id="comment-metadata" class="text-muted">{{formatDate updated_at}}</p>
+    </div>
+    <!-- Close Comments Arrow -->
+    <div class="col-12 d-flex justify-content-center align-items-center thin-row-15" onclick="toggleDropdown(this)">
+        <i class="bi bi-caret-up-fill"></i>
+    </div>
+    <div class="thin-row-15"></div>
+</div>

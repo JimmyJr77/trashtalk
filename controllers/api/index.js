@@ -13,4 +13,6 @@ router.get('/check-auth', withAuth, (req, res) => {
     res.json({ authenticated: true });
 });
 
+
+
 module.exports = router;

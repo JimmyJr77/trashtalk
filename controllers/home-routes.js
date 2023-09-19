@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
         },
         {
           model: Reply,
-          attributes: ['replies_content', 'updated_at'],
+          attributes: ['replies_content', 'updated_at', 'id', 'user_id'],
           include: [
             {
               model: User, // Includes the User model to get 'username' for the reply
@@ -25,14 +25,15 @@ router.get('/', async (req, res) => {
 
     // Serialize the data (flatten it) for better use in the template
     const posts = postData.map((post) => post.get({ plain: true }));
+    console.log(posts);
 
     // Send serialized data to the 'home' template
     res.render('home', { 
       posts,
+      userId: req.session.userId,
       loggedIn: req.session.loggedIn, 
       username: req.session.username 
     });
-    console.log(posts);
   } catch (err) {
     res.status(500).json(err);
   }

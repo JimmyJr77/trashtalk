@@ -41,7 +41,6 @@ router.get('/', async (req, res) => {
             req.session.userId = user.id;
             req.session.username = user.username;
             req.session.loggedIn = true;
-
             res.json({ user: { id: user.id, username: user.username }, message: 'You are now logged in!' });
         });
 

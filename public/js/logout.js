@@ -1,28 +1,40 @@
-// function init() {
-//     $('.btn-logout').on('click', handleLogout);
-// }
+function init() {
+    // Login and signup event bindings
+    $('.error-message').hide();
+    $('#login-form').on('submit', handleLogin);
+    $('#signup-form').on('submit', handleSignup);
 
-// async function handleLogout() {
-//     const response = await fetch('/api/users/logout', {
-//         method: 'POST'      
-//     });
+    // Logout event binding
+    $('.btn-logout').on('click', handleLogout);
+}
+
+async function handleLogout(event) {
+    event.preventDefault();
+
+    const response = await fetch('/api/users/logout', {
+        method: 'POST'
+    });
     
-//     if (response.ok) {
-//         location.assign('/');const auth = (req, res, next) => {
-//             if (!req.session.loggedIn) {
-//                 res.redirect('/');
-//                 return;
-//             }
-        
-//             next();
-//         }
-        
-//         module.exports = auth;
-//         return;
-//     }
+    if (response.ok) {
+        // After logging out, revert the UI to the logged-out state
+        $('#btn-login').show();
+        $('.btn-logout').remove();
 
-//     const { message } = await response.json();
-//     console.error(message);
-// }
+        location.assign('/');
+        return;
+    }
 
-// $(init());
+    const { message } = await response.json();
+    console.error(message);
+}
+
+const auth = (req, res, next) => {
+    if (!req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    next();
+}
+
+
+$(init);

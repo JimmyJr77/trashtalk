@@ -15,19 +15,22 @@
     <header class="container-1">
         <div id="header-logo">
             <img src="/images/trashtalk-logo-lower.png" alt="Trash Talk Logo" id="logo-img">
+        {{#if loggedIn}}
+            <div id="logged-in-name" style="font-size:1.5em" class="">{{username}}'s</div>
+        {{/if}}
         </div>
         <div id="account-btns" class="top-black bg-warning btm-black d-flex">
-            {{#if loggedIn}}
-            <button id="btn-signup" class="btn btn-signup btn-center-text btn-primary text-white " data-toggle="modal" data-target="#signupModal">Sign Up</button>
-            <button class="btn btn-logout mr-5">Logout, {{username}}</button>
-            {{else}}
-            <button id="btn-login" class="btn btn-login btn-center-text btn-primary text-white mr-5" data-toggle="modal" data-target="#loginModal">Login</button>
-            <button id="btn-signup" class="btn btn-signup btn-center-text btn-primary text-white " data-toggle="modal" data-target="#signupModal">Sign Up</button>
-            {{/if}}
+             <button id="btn-signup-wide-screen" class="btn btn-signup btn-center-text btn-primary text-white mr-5" data-toggle="modal" data-target="#signupModal">Sign Up</button>
         </div>
         <div id="nav-links">
-            <a id="home-link" href="#" src="#" alt="" class="mr-1">Home</a>
-            <a id="dashboard-link" href="#" src="#" alt="" class="ml-5 mr-2">Dashboard</a>
+            <button id="btn-signup-narrow-screen" class="btn btn-signup btn-center-text btn-primary text-white mb-2" data-toggle="modal" data-target="#signupModal">Sign Up</button>
+            <button class="btn btn-home nav-btn">Home</button>
+            <button class="btn btn-dashboard nav-btn">Dashboard</button>
+            {{#if loggedIn}}
+            <button class="btn btn-logout nav-btn">Logout</button>
+            {{else}}
+            <button id="btn-login" class="btn btn-login nav-btn" data-toggle="modal" data-target="#loginModal">Login</button>
+            {{/if}}
         </div>
     </header>
 
@@ -127,18 +130,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        // Handle logout button click
-        $('.btn-logout').click(function() {
-            $.post("/logout", function(response) {
-                if (response.message) {
-                    alert(response.message);
-                }
-                location.reload();
-            });
-        });
-    </script>
-
-    <script>
     let currentDropdown = null;
 
     // Toggle to opens & close the replies dropdown for each post
@@ -168,8 +159,10 @@
     }
     </script>
     <script src="/js/login.js"></script>
+    <script src="/js/logout.js"></script>    
     <script src="/js/new_post.js"></script>
     <script src="/js/new_reply.js"></script>
+    <script src="../utils/helpers.js"></script>
 </body>
 
 </html>
