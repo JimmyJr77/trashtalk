@@ -1,32 +1,78 @@
-{{!-- {{#extend "layouts/main"}}
-{{#content "body"}} --}}
 <main class="container mt-5">
-    <h2>Your Dashboard</h2>
-    
-    <button type="button" id="new-post-button" class="btn btn-sm mb-2 btn-primary">
-        <i class="bi bi-plus"></i> New Post
-    </button>
-
-    <div id="postFormContainer">
-        {{!-- The form to add a new post can be added here --}} 
-    </div>
-
-    {{#each posts}}
-        <section class="mb-4">
-            <div class="card">
-                <div class="card-header">
-                    {{title}} <span class="float-right">{{formatDate created_at}}</span>
-                </div>
-                <div class="card-body">
-                    <p>{{post_content}}</p>
-                    <button class="btn btn-warning edit-post-btn" data-id="{{id}}">Edit</button>
-                    <button class="btn btn-danger delete-post-btn" data-id="{{id}}">Delete</button>
-                </div>
+    <h2 class="col-12 justify-contents-center mb-4">Your Dashboard</h2>
+    <section class="col-fluid-12 row">
+        <div class="col-6">
+            <!-- Post Form Container -->
+            <div id="postFormContainer">
+                {{!-- The form to add a new post can be added here --}} 
             </div>
-        </section>
-    {{/each}}
 
+            <!-- Your Posts -->
+            <h4>Your Posts</h4>
+            
+            <button type="button" id="new-post-button" class="btn btn-sm mb-3 btn-primary">
+                <i class="bi bi-plus"></i> New Post
+            </button>
+
+            {{#each posts}}
+                {{!-- Check if there's no reply, then display --}}
+                {{#unless this.replies}}
+                    <section class="mb-4">
+                        <div class="card">
+                            <div class="card-header user-posts-header">
+                                {{title}} <span class="float-right">{{formatDate created_at}}</span>
+                            </div>
+                            <div class="card-body user-posts-body">
+                                <p>{{post_content}}</p>
+                                {{!-- Buttons for edit, delete, etc. --}}
+                            </div>
+                        </div>
+                    </section>
+                {{/unless}}
+            {{/each}}
+        </div>
+
+        <div class="col-6">
+            <!-- Your Replies -->
+            <h4 class="mb-4">Your Replies</h4>
+            {{#each postsWithReplies as |replies|}}
+                <div class="accordion user-reply-body" id="postAccordion{{this.id}}">
+                    <section class="mb-4">
+                        <div class="card">
+                            <div class="card-header user-posts-header rounded" id="heading{{this.id}}">
+                                <h5 class="mb-0">
+                                    <button class="col-12 btn btn-link p-0" type="button" data-toggle="collapse" data-target="#collapse{{this.id}}" aria-expanded="true" aria-controls="collapse{{this.id}}">
+                                        <span class="float-left">
+                                            {{title}} 
+                                        </span>
+                                        <span class="float-right">
+                                            {{formatDate created_at}}
+                                        </span>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapse{{this.id}}" class="collapse" aria-labelledby="heading{{this.id}}" data-parent="#postAccordion{{this.id}}">
+                                <div class="card-body">
+                                    <p>{{post_content}}</p>
+                                </div>
+                            </div>
+                            {{!-- Display the user's replies here --}}
+                            {{#each this.replies}}
+                                <div class="card">
+                                    <div class="card-header user-reply-header">
+                                        Reply by {{this.created_at}}:
+                                    </div>
+                                    <div class="card-body m-0">
+                                        <p>{{replies_content}}</p>
+                                    </div>
+                                </div>
+                            {{/each}}
+                        </div>
+                    </section>
+                </div>
+            {{/each}}
+        </div>
+        <div style="height:45px;"></div>
+    </section>
+    
 </main>
-{{!-- {{/content}}
-{{/extend}} --}}
-

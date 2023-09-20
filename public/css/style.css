@@ -24,6 +24,17 @@
     background-color: rgb(60, 60, 60);
 }
 
+.color-blue {
+    color: rgb(87, 87, 255);
+}
+
+.color-green {
+    color: rgb(0, 147, 0);
+}
+
+.border-thick {
+    border-width:2px !important; 
+}
 
 /* HEADER COMPONENTS */
 
@@ -49,7 +60,7 @@
     margin-top:20px;
     margin-left:150px;
     font-weight: bolder;
-    font-family:Verdana, Geneva, Tahoma, sans-serif
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 
 }
 
@@ -122,12 +133,25 @@
 
 #primary-comment-container {
     background-color: rgb(245, 255, 245);
-    border: black 1pt solid;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .col-1 {
     padding-right: 0;
     margin-left: -6px;
+}
+
+.round-icon {
+    display: inline-block;  
+    position: relative;
+    right: 10px;
+    top: 10px;
+    background-color: white;
+    border-radius: 50%;
+    border: 2px solid rgb(0, 147, 0);
+    width: 3em;
+    height: 3em;
+    color:black;
 }
 
 /* Comment box buttons */
@@ -199,3 +223,22 @@
     }
 }
   
+/* DASHBOARD */
+
+.user-posts-header {
+    background-color: rgb(224, 255, 224);
+}
+
+.user-posts-body {
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.user-reply-header {
+    background-color: rgb(228, 236, 255);
+    border-radius:0 !important; 
+}
+
+.user-reply-body {
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    background-color: lightgrey;
+}
