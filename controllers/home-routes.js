@@ -24,7 +24,15 @@ router.get('/', async (req, res) => {
     });
 
     // Serialize the data (flatten it) for better use in the template
-    const posts = postData.map((post) => post.get({ plain: true }));
+    const posts = postData.map((post) => {
+      // Create a plain object representation of the post
+      const plainPost = post.get({ plain: true });
+      
+      // Add the commentCount property to the post, counting the replies
+      plainPost.commentCount = plainPost.replies ? plainPost.replies.length : 0;
+      
+      return plainPost;
+    });
     console.log(posts);
 
     // Send serialized data to the 'home' template
@@ -39,4 +47,4 @@ router.get('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports=router;

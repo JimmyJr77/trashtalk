@@ -1,10 +1,17 @@
 $(document).ready(function() {
 
-    $(document).on('click', '#delete-post-btn', function() {
-        console.log("Delete post button clicked.");
+    $(document).on('click', '.deleteReplyButton', function() {
+        console.log("Delete reply button clicked.");
 
-        if(!window.confirm("Are you sure you want to delete this post?")) {
+        if(!window.confirm("Are you sure you want to delete this reply?")) {
             return; // User clicked 'Cancel', so stop here.
+        }
+
+        const replyID = $(this).data('delete-id'); // Extracting the replyID
+
+        if (!replyID) {
+            console.error("replyID not found. Aborting delete operation.");
+            return;
         }
 
         $.ajax({
@@ -13,25 +20,22 @@ $(document).ready(function() {
             success: function(response) {
                 console.log("Authenticated, proceeding to delete.");
 
-                // Use 'data-put-id' since that's what you set in your template
-                const postID = $(this).data('delete-id');
-                
                 $.ajax({
                     type: "DELETE",
-                    url: "/api/posts/" + postID,
+                    url: "/api/replies/" + replyID,
                     success: function(response) {
                         location.reload();
-                        alert('Post deleted successfully!');
+                        alert('Reply deleted successfully!');
                     },
                     error: function(error) {
                         if (error.status === 401) {
                             $('#loginModal').modal('show');
                         } else {
-                            alert(`Failed to delete the post ${postID}.`);
+                            alert('Failed to delete the reply.');
                         }
                     }
                 });
-            }.bind(this),
+            },
             error: function(error) {
                 if (error.status === 401) {
                     $('#loginModal').modal('show');

@@ -1,20 +1,19 @@
 $(document).ready(function() {
 
-    $(document).on('click', '.recycle-btn', function() {
-        console.log("Recycle button clicked.");
-        // const postID = $(this).data('post-id'); 
+    $(document).on('click', '.editReplyButton', function() {
+        console.log("Edit reply button clicked.");
 
         $.ajax({
             type: "GET",
             url: "/api/check-auth",
             success: function(response) {
                 console.log("Authenticated and trying to slide down comment form.");
-                const form = $(this).closest('.primary-comment-container').find('.commentForm').slideDown(); // Targeting the related commentForm
+                const form = $(this).closest('.primary-comment-container').find('.editCommentForm').slideDown(); // Targeting the related commentForm
                 if (form.length) {
-                    console.log("Comment form found.");
+                    console.log("Comment update form found.");
                     form.slideDown();
                 } else {
-                    console.log("Comment form not found.");
+                    console.log("Comment update form not found.");
                 }
                 $(this).hide();
             }.bind(this), // Binding `this` to ensure it's referring to the clicked button in the success callback
@@ -29,20 +28,20 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.cancelButton', function() {
-        $(this).closest('.commentForm').slideUp();
-        $(this).closest('.primary-comment-container').find('.recycle-btn').show();
-        $(this).closest('.commentForm').find('.comment_content').val("");
+        $(this).closest('.editCommentForm').slideUp();
+        $(this).closest('.primary-comment-container').find('#editReplyButton').show();
+        $(this).closest('.editCommentForm').find('.editComment_content').val("");
     });
 
-    $(document).on('submit', '.commentForm', function(e) {
+    $(document).on('submit', '.editCommentForm', function(e) {
         e.preventDefault();
 
-        const commentContent = $(this).find('textarea[name="comment_content"]').val();
-        const postID = $(this).closest('.primary-comment-container').find('.recycle-btn').data('post-id');
+        const commentContent = $(this).find('textarea[name="editComment_content"]').val();
+        const replyID = $(this).closest('.comments-dropdown').data('reply-id');
 
         $.ajax({
-            type: "POST",
-            url: "/api/replies/" + postID, // Add postID in the URL
+            type: "PUT",
+            url: "/api/replies/" + replyID, // Add postID in the URL
             data: {
                 replies_content: commentContent
             },

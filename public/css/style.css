@@ -73,17 +73,35 @@
     line-height:10px
  }
 
+ #btn-login-narrow-screen {
+    display:none;
+}
+
+ #btn-logout-narrow-screen {
+    display:none;
+}
+
+#btn-login-wide-screen {
+    color:rgb(0, 147, 0);
+}
+
+ #btn-logout-wide-screen {
+    color:rgb(0, 147, 0);
+}
+
 #nav-links {
     display: flex; 
     justify-content: end;
     margin-right: 49px;
+    text-align:end;
 }
 
 .nav-btn:hover {
     color: rgb(0, 147, 0);
     font-weight: bolder;
     text-decoration: underline;
-    text-decoration-style: wavy; 
+    text-decoration-thickness: 3px; 
+    text-underline-offset: 5px;
     text-underline-position: under;
 }
 
@@ -91,10 +109,10 @@
     height:30px;
     width: 100px;
     margin: 5px;
-    line-height:10px
+    line-height:10px;
 }
 
-#newPostButton {
+#new-post-button {
     display:flex;
     height:30px;
     width: 100px;
@@ -134,10 +152,31 @@
 
 /* ADJUSTMENT FOR MIN SIZE SCREEN */
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 830px) {
 
     #btn-signup-wide-screen {
        display:none;
+    }
+
+    #btn-login-wide-screen {
+        display:none;
+    }
+
+     #btn-logout-wide-screen {
+        display:none;
+    }
+
+    #btn-login-narrow-screen {
+        display:block;
+        color:rgb(0, 147, 0);
+        width:auto;
+
+    }
+    
+     #btn-logout-narrow-screen {
+        display:block;
+        color:rgb(0, 147, 0);
+        width:auto;
     }
 
     #btn-signup-narrow-screen {
@@ -151,7 +190,7 @@
 
     #nav-links {
         margin-top: 75px;
-        justify-content: left;
+        justify-content:space-between;
         margin-left:10px; 
     }
 

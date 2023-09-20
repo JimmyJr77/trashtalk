@@ -3,7 +3,7 @@
     <div style="height: 100px;">userID for who is logged in: {{userId}} </div>
 </div> --}}
 
-<div class="comments-dropdown d-none">
+<div class="comments-dropdown d-none" data-reply-id="{{this.id}}">
     <div style="height:30px;"></div>
     <div class="container">
         <span class="likes-count">120</span> 
@@ -18,10 +18,10 @@
         <div class="col-1 d-flex justify-content-end"> 
             <div id="button-container">
                 {{#if (eq userId user_id)}}
-                    <button type="button" id="edit-btn" class="btn btn-sm btn-warning mt-1" data-put-id="{{this.id}}">
+                    <button type="button" class="editReplyButton btn btn-sm btn-warning mt-1" data-put-id="{{this.id}}">
                         <i class="bi bi-pencil"></i>
                     </button>
-                    <button type="button" id="delete-btn" class="btn btn-sm btn-danger mt-1" data-delete-id="{{this.id}}">
+                    <button type="button" class="deleteReplyButton btn btn-sm btn-danger mt-1" data-delete-id="{{this.id}}">
                         <i class="bi bi-trash"></i>
                     </button>
                 {{/if}}

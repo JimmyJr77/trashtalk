@@ -1,0 +1,32 @@
+{{!-- {{#extend "layouts/main"}}
+{{#content "body"}} --}}
+<main class="container mt-5">
+    <h2>Your Dashboard</h2>
+    
+    <button type="button" id="new-post-button" class="btn btn-sm mb-2 btn-primary">
+        <i class="bi bi-plus"></i> New Post
+    </button>
+
+    <div id="postFormContainer">
+        {{!-- The form to add a new post can be added here --}} 
+    </div>
+
+    {{#each posts}}
+        <section class="mb-4">
+            <div class="card">
+                <div class="card-header">
+                    {{title}} <span class="float-right">{{formatDate created_at}}</span>
+                </div>
+                <div class="card-body">
+                    <p>{{post_content}}</p>
+                    <button class="btn btn-warning edit-post-btn" data-id="{{id}}">Edit</button>
+                    <button class="btn btn-danger delete-post-btn" data-id="{{id}}">Delete</button>
+                </div>
+            </div>
+        </section>
+    {{/each}}
+
+</main>
+{{!-- {{/content}}
+{{/extend}} --}}
+

@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $("#newPostButton").click(function() {
+    $("#new-post-button").click(function() {
         // Check if user is authenticated
         $.ajax({
             type: "GET",
@@ -8,7 +8,7 @@ $(document).ready(function() {
             success: function(response) {
                 // If user is authenticated, show the comment form
                 $("#postForm").slideDown();
-                $("#newPostButton").hide();
+                $("#new-post-button").hide();
             },
             error: function(error) {
                 if (error.status === 401) {
@@ -24,7 +24,7 @@ $(document).ready(function() {
     // Hide the comment form and clear its content
     $("#cancelButton").click(function() {
         $("#postForm").slideUp();
-        $("#newPostButton").show();
+        $("#new-post-button").show();
         $("#title").val("");
         $("#post_content").val("");
     });
