@@ -4,6 +4,10 @@
     border: solid 1px rgb(0, 147, 0);
 }
 
+.border-blue {
+    border: solid 1px rgb(87, 87, 255);
+}
+
 .btm-black {
     border-bottom: black solid 3px;
 }
@@ -225,6 +229,23 @@
   
 /* DASHBOARD */
 
+.grey-line {
+    background-color: grey;
+    height: .5px;
+    width: 100%; 
+    margin-bottom: 25px;
+}
+
+
+#dashboard-reply-title {
+    color: black;
+}
+
+#dashboard-reply-title:hover {
+    color: rgb(0, 147, 0);
+}
+
+
 .user-posts-header {
     background-color: rgb(224, 255, 224);
 }
@@ -241,4 +262,26 @@
 .user-reply-body {
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
     background-color: lightgrey;
+}
+
+.btn-xs {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+.dashboard-button-container {
+    display: none;
+}
+
+.hamburger-icon {
+    color:grey;
+    cursor: pointer; /* Makes the icon appear clickable */
+    transition: transform 0.3s ease; /* Smooth rotation */
+    float:right;
+}
+
+.hamburger-icon.rotated {
+    transform: rotate(90deg);
 }

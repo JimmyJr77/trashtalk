@@ -33,7 +33,7 @@ router.get('/', async (req, res) => {
       
       return plainPost;
     });
-    console.log(posts);
+    // console.log(posts);
 
     // Send serialized data to the 'home' template
     res.render('home', { 

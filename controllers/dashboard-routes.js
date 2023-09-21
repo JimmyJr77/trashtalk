@@ -29,7 +29,7 @@ router.get('/', withAuth, async (req, res) => {
                     where: {
                         user_id: req.session.userId
                     },
-                    attributes: ['replies_content'],
+                    attributes: ['replies_content', 'created_at', 'updated_at'],
                     include: {
                         model: User,
                         attributes: ['username']
@@ -47,7 +47,8 @@ router.get('/', withAuth, async (req, res) => {
         res.render('dashboard', {
             posts,
             postsWithReplies,
-            logged_in: req.session.logged_in
+            loggedIn: req.session.loggedIn, 
+            username: req.session.username 
         });
     } catch (err) {
         console.error(err);
