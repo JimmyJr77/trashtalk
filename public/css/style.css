@@ -13,7 +13,7 @@
 }
 
 .top-black {
-    border-top: black solid 2px;
+    border-top: black solid 3px;
 }
 
 .bg-green {
@@ -63,8 +63,8 @@
 #logo-img {
     position:absolute;
     height: 125px;
-    width: auto;
-    margin-left:40px;
+    top: 20px;
+    left:34px;
 }
 
 #logged-in-name {
