@@ -5,7 +5,7 @@
         <h2 class="col-12-fluid mb-4">Your Dashboard</h2>
     </div>
     <div class="dashboard-buttons d-flex justify-content-start">
-        <button type="button" id="new-post-button" class="btn btn-sm mb-3 btn-primary">
+        <button type="button" class="btn btn-sm mb-3 btn-primary new-post-button">
             <i class="bi bi-plus"></i> New Post
         </button>
         
@@ -157,16 +157,14 @@
                                         </div>
 
                                         {{!-- Action buttons --}}
-                                        <div class="col-1 d-flex justify-content-end"> 
+                                         <div class="col-1 d-flex justify-content-end"> 
                                             <div class="button-container">
-                                                {{#if (eq ../userId user_id)}}
-                                                <i class="fas fa-bars hamburger-icon mt-1 ml-1"></i>
-                                                {{/if}}
-                                                {{#if (eq ../userId user_id)}}
-                                                    <button type="button" id="edit-post-btn" class="btn btn-xs btn-warning mt-1 hamburger-hide" data-put-id="{{this.id}}">
+                                                {{#if (eq userId user_id)}}
+                                                    <i class="fas fa-bars hamburger-icon mt-1 ml-1"></i>
+                                                    <button type="button" class="btn btn-xs btn-warning mt-1 edit-reply-btn hamburger-hide" data-put-id="{{this.id}}">
                                                         <i class="bi bi-pencil"></i>
                                                     </button>
-                                                    <button type="button" id="delete-post-btn" class="btn btn-xs btn-danger mt-1 hamburger-hide" data-delete-id="{{this.id}}">
+                                                    <button type="button" class="btn btn-xs btn-danger mt-1 delete-reply-btn hamburger-hide" data-delete-id="{{this.id}}">
                                                         <i class="bi bi-trash"></i>
                                                     </button>
                                                 {{/if}}

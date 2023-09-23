@@ -2,14 +2,13 @@ $(document).ready(function() {
 
     $(document).on('click', '.edit-reply-btn', function() {
         console.log("Edit reply button clicked.");
-        // const postID = $(this).data('post-id'); 
 
         $.ajax({
             type: "GET",
             url: "/api/check-auth",
             success: function(response) {
                 console.log("Authenticated and trying to slide down the edit reply form.");
-                const form = $(this).closest('.primary-reply-container').find('.edit-reply-form').slideDown(); // Targeting the related edit-reply-form
+                const form = $(this).closest('.primary-reply-container').find('.edit-reply-form').slideDown();
                 if (form.length) {
                     console.log("Edit reply form found.");
                     form.slideDown();

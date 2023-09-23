@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $("#new-post-button").click(function() {
+    $(".new-post-button").click(function() {
         // Check if user is authenticated
         $.ajax({
             type: "GET",
