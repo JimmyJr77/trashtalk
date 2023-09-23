@@ -1,4 +1,6 @@
 <main class="container mt-2">
+
+{{!-- DASHBOARD HEADER --}}
     <div class="d-row text-left">
         <h2 class="col-12-fluid mb-4">Your Dashboard</h2>
     </div>
@@ -6,107 +8,130 @@
         <button type="button" id="new-post-button" class="btn btn-sm mb-3 btn-primary">
             <i class="bi bi-plus"></i> New Post
         </button>
-        <!-- Post Form Container -->
+        
+{{!-- NEW POST CONTAINER --}}
         <div id="postFormContainer" class="col-6">
-        <form id="postForm" style="display:none">
-            <input type="text" id="title" name="title" class="form-control border-green mb-2" placeholder="Enter the title" required>
-            <textarea id="post_content" name="post_content" class="form-control border-green mb-2" rows="3" placeholder="Your comment" required></textarea>
-            
-            <!-- The submit button -->
-            <button type="submit" class="btn btn-sm btn-success mb-4">
-                Submit Post
-            </button>
-            
-            <!-- The cancel button -->
-            <button type="button" id="cancelButton" class="btn btn-sm btn-danger mb-4">
-                Cancel
-            </button>
-        </form>
+            <form id="postForm" style="display:none">
+                <input type="text" id="title" name="title" class="form-control border-green mb-2" placeholder="Enter the title" required>
+                <textarea id="post_content" name="post_content" class="form-control border-green mb-2" rows="3" placeholder="Your comment" required></textarea>
+                
+                {{!-- The submit button --}}
+                <button type="submit" class="btn btn-sm btn-success mb-4">
+                    Submit Post
+                </button>
+                
+                {{!-- The cancel button --}}
+                <button type="button" id="cancelButton" class="btn btn-sm btn-danger mb-4">
+                    Cancel
+                </button>
+            </form>
+        </div>
     </div>
 
-    </div>
+    {{!-- Section divider --}}
     <div class="grey-line"></div>
 
-
+{{!-- MAIN SECTION CONTAINER --}}
     <section class="col-fluid-12 row">
         <div class="col-12 col-md-6">
-            <!-- Your Posts -->
+
+{{!-- YOUR POSTS SECTION --}}
             <h4 class="mb-4 mt-2 color-green">Your Posts</h4>
             
+            {{!-- Primary post card container --}}
             {{#each posts}}
-                {{!-- Check if there's no reply, then display --}}
-                {{!-- {{#unless this.replies}} --}}
-                    <section class="mb-4">
-                        <div class="card">
-                            <div class="card-header user-posts-header">
-                                <span class="float-left h6 py-0">
-                                    {{title}} 
-                                </span>
-                                <span class="float-right text-muted text-center">
-                                    {{formatDate created_at}}
-                                </span>
-                            </div>
+                <section class="mb-4">
+                    <div class="card primary-comment-container shadow">
 
-                            <div class="col-12 m-0 card-body user-posts-body">
-                            <div>
+                        {{!-- Post Header: Title & Date --}}
+                        <div class="card-header user-posts-header">
+                            <span class="float-left h6 py-0">
+                                {{title}} 
+                            </span>
+                            <span class="float-right text-muted text-center">
+                                {{formatDate created_at}}
+                            </span>
+                        </div>
 
-                                <div>
-                                    <p>{{post_content}}</p>
-                                </div>
-                                <div class="hamburger-container">
-                                    <i class="fas fa-bars hamburger-icon"></i>
-                                    <div class="dashboard-button-container">
-                                        <button type="button" class="btn btn-xs btn-primary recycle-btn mt-1" data-post-id="{{this.id}}">
-                                            <i class="fas fa-recycle"></i>
+                        {{!-- User post and action buttons --}}
+                        <div class="col-12 p-2 m-0 row card-body user-posts-body">
+
+                            <div class="col-11">
+                                <span id="primary-comment">{{post_content}}</span>
+                            </div>     
+                            <div class="col-1 d-flex justify-content-end"> 
+                                <div class="button-container">
+                                    {{#if (eq ../userId user_id)}}
+                                    <i class="fas fa-bars hamburger-icon mt-1 ml-1"></i>
+                                    {{/if}}
+                                    <button type="button" class="btn btn-xs btn-primary recycle-btn mt-1" data-post-id="{{this.id}}">
+                                        <i class="fas fa-recycle"></i>
+                                    </button>
+                                    {{#if (eq ../userId user_id)}}
+                                        <button type="button" id="edit-post-btn" class="btn btn-xs btn-warning mt-1 hamburger-hide" data-put-id="{{this.id}}">
+                                            <i class="bi bi-pencil"></i>
                                         </button>
-                                        {{#if (eq ../userId user_id)}}
-                                            <button type="button" id="edit-post-btn" class="btn btn-xs btn-warning mt-1" data-put-id="{{this.id}}">
-                                                <i class="bi bi-pencil"></i>
-                                            </button>
-                                            <button type="button" id="delete-post-btn" class="btn btn-xs btn-danger mt-1" data-delete-id="{{this.id}}">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        {{/if}}
-                                    </div>
-                                </div>
-
-{{!-- EDIT POST TOP--}}
-                                <div id="editPostFormContainer">
-                                    <form class="editPostForm mx-2" style="display:none">
-                                        <input type="text" name="editTitle" class="editTitle form-control border-warning border-thick mb-2" value="{{title}}" required>
-                                        <textarea name="editPost_content" class="editPost_content form-control border-warning border-thick mb-2" rows="3" required>{{post_content}}</textarea>
-                                        
-                                        <!-- The submit button -->
-                                        <button type="Updated Post" class="btn btn-sm btn-warning mb-4">
-                                            Update Post
+                                        <button type="button" id="delete-post-btn" class="btn btn-xs btn-danger mt-1 hamburger-hide" data-delete-id="{{this.id}}">
+                                            <i class="bi bi-trash"></i>
                                         </button>
-                                        
-                                        <!-- The cancel button -->
-                                        <button type="button" class="cancelButton btn btn-sm btn-danger mb-4">
-                                            Cancel
-                                        </button>
-                                    </form>
+                                    {{/if}}
                                 </div>
-{{!-- EDIT POST BOTTOM --}}
-
                             </div>
                         </div>
-                    </section>
-                {{!-- {{/unless}} --}}
+
+{{!-- EDIT POSTS --}}
+                        <div id="editPostFormContainer">
+                            <form class="editPostForm mx-2" style="display:none">
+                                <input type="text" name="editTitle" class="editTitle form-control border-warning border-thick mb-2" value="{{title}}" required>
+                                <textarea name="editPost_content" class="editPost_content form-control border-warning border-thick mb-2" rows="3" required>{{post_content}}</textarea>
+                                
+                                <!-- The submit button -->
+                                <button type="Updated Post" class="btn btn-sm btn-warning mb-4">
+                                    Update Post
+                                </button>
+                                
+                                <!-- The cancel button -->
+                                <button type="button" class="cancelButton btn btn-sm btn-danger mb-4">
+                                    Cancel
+                                </button>
+                            </form>
+                        </div>
+
+{{!-- REPLY TO POST --}}            
+                        <div class="commentFormContainer container-5 pr-3">
+                            <form class="commentForm" style="display:none">
+                                <textarea name="comment_content" class="form-control bg-white rounded px-3 border border-primary border-thick m-2" rows="3" placeholder="Your comment" required></textarea>
+                                
+                                <!-- The submit button -->
+                                <button type="submit" class="btn btn-sm btn-primary mb-4 mx-2">
+                                    Submit Comment
+                                </button>
+                                
+                                <!-- The cancel button -->
+                                <button type="button" class="btn btn-sm btn-danger cancelButton mb-4">
+                                    Cancel
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </section>
             {{/each}}
         </div>
 
+{{!-- YOUR REPLIES SECTION --}}
         <div class="col-12 col-md-6">
-            <!-- Your Replies -->
             <h4 class="mb-4 mt-2 color-blue">Your Replies</h4>
+
+            {{!-- Post Header: Title & Date --}}
             {{#each postsWithReplies as |replies|}}
                 <div class="accordion rounded user-reply-body" id="postAccordion{{this.id}}">
                     <section class="mb-4">
-                        <div class="card bg-white">
+                        <div class="card bg-white pb-3">
                             <div class="card-header user-posts-header rounded-top" id="heading{{this.id}}">
                                 <h5 class="mb-0">
                                     <button class="col-12 btn btn-link p-0" type="button" data-toggle="collapse" data-target="#collapse{{this.id}}" aria-expanded="true" aria-controls="collapse{{this.id}}">
-                                        <span id="dashboard-reply-title" class="float-left h6 text-color-black py-0">
+                                        <span id="dashboard-post-title" class="float-left h6 text-color-black py-0">
                                             {{title}} 
                                         </span>
                                         <span class="float-right text-muted">
@@ -116,55 +141,69 @@
                                 </h5>
                             </div>
                             <div id="collapse{{this.id}}" class="collapse" aria-labelledby="heading{{this.id}}" data-parent="#postAccordion{{this.id}}">
+
+                                {{!-- Collapsable post content --}}
                                 <div class="card-body mx-3 mt-3 mb-3 rounded border-green border-thick p-2">
                                     <p>{{post_content}}</p>
                                 </div>
                             </div>
-                            {{!-- Display the user's replies here --}}
+
+                            {{!-- User replies to the above post --}}
                             {{#each this.replies}}
-                                <div class="reply-container mx-3 mt-3 mb-0 rounded border-blue p-2">
-                                    <p>{{replies_content}}</p>
-                                    <div class="hamburger-container">
-                                    <i class="fas fa-bars hamburger-icon"></i>
-                                    <div class="dashboard-button-container">
-                                        <button type="button" class="btn btn-xs btn-primary recycle-btn mt-1" data-post-id="{{this.id}}">
-                                            <i class="fas fa-recycle"></i>
-                                        </button>
-                                        {{#if (eq ../userId user_id)}}
-                                            <button type="button" id="edit-post-btn" class="btn btn-xs btn-warning mt-1" data-put-id="{{this.id}}">
-                                                <i class="bi bi-pencil"></i>
-                                            </button>
-                                            <button type="button" id="delete-post-btn" class="btn btn-xs btn-danger mt-1" data-delete-id="{{this.id}}">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        {{/if}}
+                                <div class="primary-reply-container col-12 mt-3 mb-0">
+                                    <div class="row card-body mt-2 mx-2 rounded border-blue p-1">
+                                        <div class="col-11 p-0">
+                                            <span class="ml-2" >{{replies_content}}</span>
+                                        </div>
+
+                                        {{!-- Action buttons --}}
+                                        <div class="col-1 d-flex justify-content-end"> 
+                                            <div class="button-container">
+                                                {{#if (eq ../userId user_id)}}
+                                                <i class="fas fa-bars hamburger-icon mt-1 ml-1"></i>
+                                                {{/if}}
+                                                {{#if (eq ../userId user_id)}}
+                                                    <button type="button" id="edit-post-btn" class="btn btn-xs btn-warning mt-1 hamburger-hide" data-put-id="{{this.id}}">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </button>
+                                                    <button type="button" id="delete-post-btn" class="btn btn-xs btn-danger mt-1 hamburger-hide" data-delete-id="{{this.id}}">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                {{/if}}
+                                            </div>
+                                        </div>
+                                    </div> 
+
+                                    {{!-- Date of reply --}}
+                                    <div class="ml-4">
+                                        <small class="reply-date text-muted float-left">{{formatDate this.created_at}}</small>
                                     </div>
-                                </div>
-                                </div>
-                                <div class="ml-4">
-                                    <small class="reply-date text-muted float-left">{{formatDate this.created_at}}</small>
-                                </div>
-                                 <div id="edit-reply-dropdown">
-                                    <form class="editCommentFormContainer container-5 pr-3">
-                                        <div class="editCommentForm d-none">
-                                            <textarea name="editComment_content" class="form-control bg-white rounded px-3 border m-2 border-warning border-thick" rows="3">{{replies_content}}</textarea>
+
+{{!-- REPLY CONTAINER TO EDIT REPLIES --}}
+
+                                        <div class="edit-reply-form-container container-5 pr-3">
+                                            <form class="edit-reply-form" style="display:none">
+                                                <textarea name="edit-replies_content" class="form-control bg-white rounded px-3 border m-2 border-warning border-thick" rows="3">{{replies_content}}</textarea>
+
+                                                <!-- The submit button -->
                                                 <button type="submit" class="btn btn-sm btn-warning mb-4 mx-2">
                                                     Update Comment
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-danger cancelButton mb-4">
+
+                                                <!-- The cancel button -->
+                                                <button type="button" class="btn btn-sm btn-danger cancel-btn mb-4">
                                                     Cancel
                                                 </button>
-                                        </div>
-                                    </form>
+                                            </form>
+                                        </div>       
                                 </div>
-                            {{/each}}
-                        </div>
+                            {{/each}}       
                     </section>
                 </div>
             {{/each}}
         </div>
-
-        <div style="height:45px;"></div>
     </section>
     
+
+    <div style="height:45px;"></div>
 </main>

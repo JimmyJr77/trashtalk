@@ -3,7 +3,6 @@ $(document).ready(function() {
     // Fixed the selector to use the "#" symbol for the id
     $(document).on('click', '#edit-post-btn', function() {
         console.log("Edit post button clicked.");
-        // const postID = $(this).data('put-id');
 
         $.ajax({
             type: "GET",

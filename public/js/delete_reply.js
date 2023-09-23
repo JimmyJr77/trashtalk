@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $(document).on('click', '.deleteReplyButton', function() {
+    $(document).on('click', '.delete-reply-btn', function() {
         console.log("Delete reply button clicked.");
 
         if(!window.confirm("Are you sure you want to delete this reply?")) {

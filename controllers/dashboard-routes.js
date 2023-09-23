@@ -3,6 +3,7 @@ const { Post, User, Reply } = require('../models'); // Ensure you import Reply
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, async (req, res) => {
+    console.log('Fetching data from the api router')
     try {
         // Fetch all the posts by the logged-in user
         const postData = await Post.findAll({
@@ -29,7 +30,7 @@ router.get('/', withAuth, async (req, res) => {
                     where: {
                         user_id: req.session.userId
                     },
-                    attributes: ['replies_content', 'created_at', 'updated_at'],
+                    attributes: ['replies_content', 'created_at', 'updated_at', 'id'],
                     include: {
                         model: User,
                         attributes: ['username']

@@ -1,3 +1,5 @@
+let logoutTimer;
+
 function init() {
     // Login and signup event bindings
     $('.error-message').hide();
@@ -6,6 +8,27 @@ function init() {
 
     // Logout event binding
     $('.btn-logout').on('click', handleLogout);
+
+    // Start the logout timer if the user is authenticated
+    if (isAuthenticated()) {
+        startLogoutTimer();
+    }
+}
+
+function isAuthenticated() {
+    return $('.btn-logout').length > 0;
+}
+
+function startLogoutTimer() {
+    // Clear any existing timers
+    if (logoutTimer) {
+        clearTimeout(logoutTimer);
+    }
+
+    // 15 minutes = 15 * 60 * 1000 milliseconds
+    logoutTimer = setTimeout(function() {
+        handleLogout({ preventDefault: () => {} });
+    }, 15 * 60 * 1000);
 }
 
 async function handleLogout(event) {
@@ -28,13 +51,10 @@ async function handleLogout(event) {
     console.error(message);
 }
 
-const auth = (req, res, next) => {
-    if (!req.session.loggedIn) {
-        res.redirect('/');
-        return;
-    }
-    next();
-}
 
+// Reset the logout timer whenever there's an action
+document.addEventListener('click', startLogoutTimer);
+document.addEventListener('mousemove', startLogoutTimer);
+document.addEventListener('keypress', startLogoutTimer);
 
 $(init);

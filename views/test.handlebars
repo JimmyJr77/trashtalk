@@ -1,7 +1,6 @@
-
 <main class="container mt-5">
     
-    <button type="button" class="btn btn-sm mb-2 btn-primary new-post-button">
+    <button type="button" id="new-post-button" class="btn btn-sm mb-2 btn-primary">
         <i class="bi bi-plus"></i> New Post
     </button>
     
@@ -25,8 +24,8 @@
 
 <!-- POSTS -->
 {{#each posts}}
-    <section class="rounded primary-comment-container shadow bg-light-green">  
-        <div>
+    <section id="primary-comment-container" class="rounded">  
+        <div class="primary-comment-container">
             <div class="d-flex justify-content-between rounded-top bg-green text-white" style="height: 25px;">
                 <p id="username" class="d-flex px-2 font-weight-bold">{{user.username}}</p>
                 <p class="d-flex px-2 font-weight-bold"></p>
@@ -40,26 +39,40 @@
                     <span id="primary-comment">{{post_content}}</span>
                 </div>                
                 <div class="col-1 d-flex justify-content-end"> 
-                    <div class="button-container">
-                        {{#if (eq ../userId user_id)}}
+                    <div id="button-container">
+
+                    {{!-- <div class="hamburger-container">
+                        <i class="fas fa-bars hamburger-icon"></i>
+                        <div class="dashboard-button-container">
+                            <button type="button" class="btn btn-xs btn-primary recycle-btn mt-1" data-post-id="{{this.id}}">
+                                <i class="fas fa-recycle"></i>
+                            </button>
+                            {{#if (eq ../userId user_id)}}
+                                <button type="button" id="edit-post-btn" class="btn btn-xs btn-warning mt-1" data-put-id="{{this.id}}">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button type="button" id="delete-post-btn" class="btn btn-xs btn-danger mt-1" data-delete-id="{{this.id}}">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            {{/if}}
+                        </div>
+                    </div> --}}
                         <i class="fas fa-bars hamburger-icon mt-1 ml-1"></i>
-                        {{/if}}
                         <button type="button" class="btn btn-xs btn-primary recycle-btn mt-1" data-post-id="{{this.id}}">
                              <i class="fas fa-recycle"></i>
                         </button>
                         {{#if (eq ../userId user_id)}}
-                            <button type="button" id="edit-post-btn" class="btn btn-xs btn-warning mt-1 hamburger-hide" data-put-id="{{this.id}}">
+                            <button type="button" id="edit-post-btn" class="btn btn-xs btn-warning mt-1" data-put-id="{{this.id}}">
                                 <i class="bi bi-pencil"></i>
                             </button>
-                            <button type="button" id="delete-post-btn" class="btn btn-xs btn-danger mt-1 hamburger-hide" data-delete-id="{{this.id}}">
+                            <button type="button" id="delete-post-btn" class="btn btn-xs btn-danger mt-1" data-delete-id="{{this.id}}">
                                 <i class="bi bi-trash"></i>
                             </button>
                         {{/if}}
                     </div>
                 </div>
             </div>
-
-{{!-- REPLY TO POST --}}            
+            
             <div class="commentFormContainer container-5 pr-3">
                 <form class="commentForm" style="display:none">
                     <textarea name="comment_content" class="form-control bg-white rounded px-3 border border-primary border-thick m-2" rows="3" placeholder="Your comment" required></textarea>
@@ -76,7 +89,6 @@
                 </form>
             </div>
 
-{{!-- EDIT POSTS --}}
            <div id="editPostFormContainer">
                 <form class="editPostForm mx-2" style="display:none">
                     <input type="text" name="editTitle" class="editTitle form-control border-warning border-thick mb-2" value="{{title}}" required>
@@ -106,9 +118,51 @@
 
             <!-- REPLIES DROP DOWN -->
             <div class="comments-dropdown d-none" >
-            {{#each replies}}
-               {{> repliesPartial userId=../../userId}}
-            {{/each}}
+                <div class="primary-reply-container" data-reply-id="{{this.id}}">
+                    <div style="height:30px;"></div>
+                    <div class="container">
+                        {{!-- <span class="likes-count">120</span> 
+                        <span class="star-outline ml-2" onclick="toggleStar(this)" data-id="{{id}}">&#9734;</span> --}}
+                        <i class="bi bi-person-circle text-primary" style="font-size: 2rem;"></i>
+                        <span class="username ml-2 font-weight-bold color-blue">{{user.username}}:</span>
+                    </div>
+                    <!-- Comment -->
+                    <div class="bg-white rounded py-1 m-2 border border-primary row">
+                        <div class="col-11">
+                            <span class="comment-text ml-2">{{replies_content}}</span>
+                        </div>
+                        <div class="col-1 d-flex justify-content-end"> 
+                            <div class="button-container">
+                                {{#if (eq userId user_id)}}
+                                    <button type="button" class="btn btn-xs btn-warning mt-1 edit-reply-btn" data-put-id="{{this.id}}">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-xs btn-danger mt-1 delete-reply-btn " data-delete-id="{{this.id}}">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 d-flex justify-content-between align-items-bottom thin-row-15">
+                        <p id="comment-metadata" class="text-muted"></p>
+                        <p id="comment-metadata" class="text-muted">{{formatDate updated_at}}</p>
+                    </div>
+                    <div class="edit-reply-dropdown">
+                        <form class="edit-reply-form-container container-5 pr-3" style="display:none">
+                            <div class="edit-reply-form">
+                                <textarea name="edit-reply-content" class="form-control bg-white rounded px-3 border m-2 border-warning border-thick" rows="3">{{replies_content}}</textarea>
+                                <button type="submit" class="btn btn-sm btn-warning mb-4 mx-2">
+                                    Update Comment
+                                </button>
+                                <button type="button" class="btn btn-sm btn-danger cancel-button mb-4">
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div class="col-12 d-flex justify-content-center align-items-center thin-row-15" onclick="toggleDropdown(this)">
                     <i class="bi bi-caret-up-fill"></i>
                 </div>

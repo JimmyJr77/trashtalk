@@ -51,7 +51,6 @@ router.get('/', async (req, res) => {
 });
 
 
-
 router.post('/logout', (req, res) => {
     try {
         if (!req.session.loggedIn) {

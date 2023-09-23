@@ -131,40 +131,9 @@
     </div>
 </div>
 
-
-
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script>
-    let currentDropdown = null;
-
-    // Toggle to opens & close the replies dropdown for each post
-    function toggleDropdown(element) {
-        const dropdown = element.nextElementSibling;
-
-        if (dropdown !== currentDropdown) {
-            // Close the previously opened dropdown
-            if (currentDropdown) {
-                currentDropdown.style.display = "none";
-                currentDropdown.classList.add("d-none");
-            }
-
-            // Open the clicked dropdown
-            dropdown.style.display = "block";
-            dropdown.classList.remove("d-none");
-            currentDropdown = dropdown;
-        } else {
-            // Toggle the visibility of the same dropdown
-            if (dropdown.style.display === "none" || dropdown.classList.contains("d-none")) {
-                dropdown.style.display = "block";
-                dropdown.classList.remove("d-none");
-            } else {
-                dropdown.style.display = "none";
-            }
-        }
-    }
-    </script>
     <script src="/js/login.js"></script>
     <script src="/js/logout.js"></script>    
     <script src="/js/new_post.js"></script>
@@ -173,7 +142,7 @@
     <script src="/js/edit_reply.js"></script>
     <script src="/js/delete_post.js"></script>
     <script src="/js/delete_reply.js"></script>
-    <script src="/js/dashboard.js"></script>
+    <script src="/js/main.js"></script>
 
 </body>
 

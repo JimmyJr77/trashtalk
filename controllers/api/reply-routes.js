@@ -16,7 +16,6 @@ router.get('/', async (req, res) => {
 
 // Route to create a new reply for a reply
 router.post('/:post_id', async (req, res) => {
-    // console.log(req.body);   
     try {
         const newReply = await Reply.create({
             replies_content: req.body.replies_content,
@@ -33,6 +32,8 @@ router.post('/:post_id', async (req, res) => {
 
 // Route to update a reply
 router.put('/:id', async (req, res) => {
+    console.log("Updated reply sent: " + req.body.replies_content);   
+    console.log("Reply ID: " + req.params.id);  
     try {
         const updatedReply = await Reply.update(
             {
@@ -40,8 +41,8 @@ router.put('/:id', async (req, res) => {
             },
             {
                 where: {
-                    // id: req.params.id, // For testing
                     user_id: req.session.userId, // Ensure the user owns the post
+                    id: req.params.id
                 },
             }
         );
