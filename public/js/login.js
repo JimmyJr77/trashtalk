@@ -1,11 +1,3 @@
-let userId;
-
-function init() {
-    $('.error-message').hide();
-    $('#login-form').on('submit', handleLogin);
-    $('#signup-form').on('submit', handleSignup);
-}
-
 async function handleLogin(event) {
     event.preventDefault();
 
@@ -24,22 +16,19 @@ async function handleLogin(event) {
             }),   
         });
 
+        const responseData = await response.json();
+        
+        // Checks if the response is successful
         if (response.ok) {
-            const { username, message } = await response.json();
-            alert(message); // Shows a temporary alert to the user about successful login.
-            
-            // Updates the UI elements to reflect the logged-in state
-            $('#btn-login').hide();
-            $('#btn-signup').after(`<button class="btn btn-logout">Logout, ${username}</button>`);
-            
-            location.reload(); // This is optional. The UI is already updated.
+            alert(responseData.message);  // Displays the message "You are now logged in!" (from user-routes.js)
+            location.reload();
             return;
+        } else {
+            // This displays any/all server-sent error messages
+            alert(responseData.message); 
         }
-
-        const { message } = await response.json();
-        $('#login-form.error-message').text(message).show();
     } catch (error) {
-        $('#login-form.error-message').text('An error occurred. Please try again later.').show();
+        alert('An error occurred. Please try again later.'); 
     }
 }
 
@@ -54,43 +43,39 @@ async function handleSignup(event) {
     const first_name = $('#signupFirstName').val();
     const last_name = $('#signupLastName').val();
 
-    // Hides any previously shown error messages
-    $('#signup-form .error-message').hide();
-
     // Checks if passwords match
     if (password !== confirmPassword) {
-        $('#signup-form .error-message').text('Password fields must match.').show();
+        alert('Password fields must match.');
         return;
     }
 
-    //I can add more password validation considerations here if I want
-
     try {
         const response = await fetch('/api/users/signup', {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            username,
-            password,
-            email,
-            first_name,
-            last_name
-        }),
-    });
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username,
+                password,
+                email,
+                first_name,
+                last_name
+            }),
+        });
+
+        const data = await response.json();
 
         if (response.ok) {
-            const { userId } = await response.json();
             location.reload();
             return;
         }
 
-        const { message } = await response.json();
-        $('#signup-form .error-message').text(message).show();
+        // Assuming the server returns a message in the JSON response for errors
+        alert(data.message);
 
     } catch (error) {
-        $('#signup-form .error-message').text('An error occurred. Please try again later.').show();
+        alert('An error occurred. Please try again later.');
     }
 }
 

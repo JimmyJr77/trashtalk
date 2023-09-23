@@ -118,18 +118,6 @@ router.post('/signup', async (req, res) => {
         if (error.type !== 'Validation error') {
             return res.status(400).json({ message: error.message });
         }
-
-        const dataName = error.path;
-        const dataNameCap = dataName.charAt(0).toUpperCase() + dataName.slice(1).toLowerCase();
-        const validate = Users.getAttributes()[dataName]?.validate;
-
-        if (error.validatorName === 'len') {
-            return res.status(400).json({ message: `${dataNameCap} must be at least ${validate.len[0]} characters long!` });
-        } else if (error.validatorName === 'isAlphanumeric') {
-            return res.status(400).json({ message: `${dataNameCap} must contain only letters and numbers!` });
-        } else {
-            return res.status(400).json({ message: error.message });
-        }
     }
 });
 

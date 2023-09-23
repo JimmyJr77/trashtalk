@@ -10,6 +10,7 @@ function init() {
     $('.btn-logout').on('click', handleLogout);
 
     // Start the logout timer if the user is authenticated
+    // (you'll need to define the isAuthenticated() function or replace it with your authentication check)
     if (isAuthenticated()) {
         startLogoutTimer();
     }
@@ -51,6 +52,13 @@ async function handleLogout(event) {
     console.error(message);
 }
 
+const auth = (req, res, next) => {
+    if (!req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    next();
+}
 
 // Reset the logout timer whenever there's an action
 document.addEventListener('click', startLogoutTimer);
