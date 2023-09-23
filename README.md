@@ -4,7 +4,7 @@
 
 ![JavaScript](https://img.shields.io/badge/JavaScript-42%-yellow) ![Handlebars](https://img.shields.io/badge/Handlebars-40%-orange) ![HTML](https://img.shields.io/badge/HTML-13%-red) ![CSS](https://img.shields.io/badge/CSS-5%-purple)
 
-The hosted site can be found [here](https://jimmyjr77.github.io/trashtalk/).
+The hosted site can be found [here](https://trashtalk-recycler-4f184b751d0b.herokuapp.com/).
 
 ## Description
 #### Motivation:
