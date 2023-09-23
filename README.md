@@ -1,132 +1,158 @@
-# 14 Model-View-Controller (MVC): Tech Blog
+# Trash Talk Blog
 
-## Your Task
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
 
-Writing about tech can be just as important as making it. Developers spend plenty of time creating new applications and debugging existing codebases, but most developers also spend at least some of their time reading and writing about technical concepts, recent advancements, and new technologies. A simple Google search for any concept covered in this course returns thousands of think pieces and tutorials from developers of all skill levels!
+![JavaScript](https://img.shields.io/badge/JavaScript-42%-yellow) ![Handlebars](https://img.shields.io/badge/Handlebars-40%-orange) ![HTML](https://img.shields.io/badge/HTML-13%-red) ![CSS](https://img.shields.io/badge/CSS-5%-purple)
 
-Your task this week is to build a CMS-style blog site similar to a Wordpress site, where developers can publish their blog posts and comment on other developers’ posts as well. You’ll build this site completely from scratch and deploy it to Heroku. Your app will follow the MVC paradigm in its architectural structure, using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication.
+The hosted site can be found [here](https://jimmyjr77.github.io/trashtalk/).
 
-## User Story
+## Description
+#### Motivation:
+So much of online interaction is done with a tremendous amount of vitriol and people lack a sense of compassion when dealing with others online. 
 
-```md
-AS A developer who writes about tech
-I WANT a CMS-style blog site
-SO THAT I can publish articles, blog posts, and my thoughts and opinions
-```
+#### Why Build
+This app was created to provide users an opportunity to say what they really feel about a topic and get things off their chest. Once they send a message it gets run through generative AI to reconstruct (recycle) their trash talk into a more thoughtful, polite, and constructive manner (future feature not yet installed).
 
-## Acceptance Criteria
+#### Problem Solved:
+The app will help alleviate the mental health concerns associated with holding in anger and aggression by allowing users an outlet to express themselves wholely though writing out their true feelings. This app will also help prevent depression and emotional distress by softening harsh criticisms with constructive conversation. Finally, this app will help people connect in a more thoughtful way on sensitive topics. 
 
-```md
-GIVEN a CMS-style blog site
-WHEN I visit the site for the first time
-THEN I am presented with the homepage, which includes existing blog posts if any have been posted; navigation links for the homepage and the dashboard; and the option to log in
-WHEN I click on the homepage option
-THEN I am taken to the homepage
-WHEN I click on any other links in the navigation
-THEN I am prompted to either sign up or sign in
-WHEN I choose to sign up
-THEN I am prompted to create a username and password
-WHEN I click on the sign-up button
-THEN my user credentials are saved and I am logged into the site
-WHEN I revisit the site at a later time and choose to sign in
-THEN I am prompted to enter my username and password
-WHEN I am signed in to the site
-THEN I see navigation links for the homepage, the dashboard, and the option to log out
-WHEN I click on the homepage option in the navigation
-THEN I am taken to the homepage and presented with existing blog posts that include the post title and the date created
-WHEN I click on an existing blog post
-THEN I am presented with the post title, contents, post creator’s username, and date created for that post and have the option to leave a comment
-WHEN I enter a comment and click on the submit button while signed in
-THEN the comment is saved and the post is updated to display the comment, the comment creator’s username, and the date created
-WHEN I click on the dashboard option in the navigation
-THEN I am taken to the dashboard and presented with any blog posts I have already created and the option to add a new blog post
-WHEN I click on the button to add a new blog post
-THEN I am prompted to enter both a title and contents for my blog post
-WHEN I click on the button to create a new blog post
-THEN the title and contents of my post are saved and I am taken back to an updated dashboard with my new blog post
-WHEN I click on one of my existing posts in the dashboard
-THEN I am able to delete or update my post and taken back to an updated dashboard
-WHEN I click on the logout option in the navigation
-THEN I am signed out of the site
-WHEN I am idle on the site for more than a set time
-THEN I am able to view posts and comments but I am prompted to log in again before I can add, update, or delete posts
-```
+#### What Was Learned:
+Through the development of this app, valuable insights were gained regarding MVC framework. Database managmenet, routes, api calls, handlebars, encryption (hash/salt), and other concepts were new to me here. Additionally, I was able to take some time to think about UI/UX and prepare for future build.
 
-## Mock-Up
+## Table of Contents
+  * [Installation](#installation)
+  * [Usage](#usage)
+  * [Credits](#credits)
+  * [License](#license)
+  * [Badges](#badges)
+  * [Features](#features)
+  * [How to Contribute](#how-to-contribute)
 
-The following animation demonstrates the application functionality:
+## Installation Instructions
+#### Step 1:
+Ensure you have Node.js installed on your computer.
 
-![Animation cycles through signing into the app, clicking on buttons, and updating blog posts.](./Assets/14-mvc-homework-demo-01.gif) 
+#### Step 2:
+Clone this GitHub repository to your local machine using git clone.
 
-## Getting Started
+#### Step 3:
+Navigate to the root directory of the project in the terminal.
 
-Your application’s folder structure must follow the Model-View-Controller paradigm. You’ll need to use the [express-handlebars](https://www.npmjs.com/package/express-handlebars) package to implement Handlebars.js for your Views, use the [MySQL2](https://www.npmjs.com/package/mysql2) and [Sequelize](https://www.npmjs.com/package/sequelize) packages to connect to a MySQL database for your Models, and create an Express.js API for your Controllers.
+#### Step 4:
+Install the required dependencies by running npm install.
 
-You’ll also need the [dotenv package](https://www.npmjs.com/package/dotenv) to use environment variables, the [bcrypt package](https://www.npmjs.com/package/bcrypt) to hash passwords, and the [express-session](https://www.npmjs.com/package/express-session) and [connect-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize) packages to add authentication.
+## Usage
+#### Example 1:
+Users can access posts and see responses, but they cannot participate in the discussion or manage their posts unless they are logged in. Any actions attempted will prompt the user to login. If the user doesn't have an account, they can click the Sign Up button.
 
-**Note**: The [express-session](https://www.npmjs.com/package/express-session) package stores the session data on the client in a cookie. When you are idle on the site for more than a set time, the cookie will expire and you will be required to log in again to start a new session. This is the default behavior and you do not have to do anything to your application other than implement the npm package.
+![description](./other/images/) 
 
-## Grading Requirements
+![description](./other/images/home.png) 
 
-> **Note**: If a Challenge assignment submission is marked as “0”, it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include the following:
->
-> * A repository that has no code
->
-> * A repository that includes a unique name but nothing else
->
-> * A repository that includes only a README file but nothing else
->
-> * A repository that only includes starter code
+![description](./other/images/login-portal.png) 
 
-This Challenge is graded based on the following criteria:
+![description](./other/images/signup-portal.png) 
 
-### Technical Acceptance Criteria: 40%
+#### Example 2:
+Once logged in, the user can begin interacting with the site. Users can interact with other users' posts on the home page or go to the User Dashboard and see/manage all of their own posts and replies.
 
-* Satisfies all of the preceding acceptance criteria plus the following:
+![description](./other/images/dashboard.png) 
 
-    * Application’s folder structure follows the Model-View-Controller paradigm.
+![description](./other/images/edit-dashboard-reply.png)
 
-    * Uses the [express-handlebars](https://www.npmjs.com/package/express-handlebars) package to implement Handlebars.js for your Views.
+![description](./other/images/dashboard-post-reply.png) 
 
-    * Application must be deployed to Heroku.
+#### Example 3:
+To create a new post, the user can select the new post button on the top of the home and dashboard pages. They must fill out a title and comment to fulfill posting requirements.
 
-### Deployment: 32%
+![description](./other/images/new-post.png) 
 
-* Application deployed at live URL.
+#### Example 4:
+To reply to a post, users can find a recycle symbol in the top right corner of each post. This icon is always visible. It is a recycle symbol instead of a traditional reply symbol because their trash talk will be recycled into a polite reply once full functionality is in play. They can reply to other users' posts as well as their own posts.
 
-* Application loads with no errors.
+![description](./other/images/reply-icon.png) 
 
-* Application GitHub URL submitted.
+![description](./other/images/reply-post.png) 
 
-* GitHub repository contains application code.
+#### Example 5:
+To access edit and delete functionality for posts and replies, users can find a hamburger icon in the top right of any post or reply comment window for which they are the owner. By clicking on this icon, it will spin 90 degrees and open up the edit/delete button menu.
 
-### Application Quality: 15%
+![description](./other/images/user-owned-post.png)
 
-* User experience is intuitive and easy to navigate.
+![description](./other/images/user-owned-post-mangement.png) 
 
-* User interface style is clean and polished.
+#### Example 6:
+Users can select the edit button and correct their post and reply text in the drop down forms.
 
-* Application resembles the mock-up functionality provided in the Challenge instructions.
+![description](./other/images/edit-post.png) 
 
-### Repository Quality: 13%
+#### Example 7:
+Users can select the delete button to delete the selected post or reply. They will be prompted to verify their intention to do so. 
 
-* Repository has a unique name.
+#### Example 8:
+Upon logging in, the login button will be replaced by a logout button. Users can logout by selecting the logout link. If users remain inactive for 15 minutes, they will be logged out automatically.
 
-* Repository follows best practices for file structure and naming conventions.
+![description](./other/images/header-login.png) 
 
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
+![description](./other/images/header-logout.png) 
 
-* Repository contains multiple descriptive commit messages.
+## Credits
+  * I worked with an AskBCS representatives to solve a variety of sticking points and discussed some pain points with course instructors.
+  * I was able to reuse some basic html functionality from my work on a previous project.
+  * ChatGPT supported with general back and forth dialogue to better understand concepts and problem solve. 
+  * Documentation was referenced for a variety of troubleshooting.
 
-* Repository contains quality readme file with description, screenshot, and link to deployed application.
+#### Tutorials Followed:
 
-## Review
+  * https://dev.mysql.com/doc
+  * https://chat.openai.com
+  * https://handlebarsjs.com/
+  * https://github.com/ericf/express-handlebars
+  * https://www.npmjs.com/package/bcrypt
+  * https://sequelize.org/master/
+  * https://sequelize.org/master/manual/assocs.html
+  * https://expressjs.com/
+  * https://expressjs.com/en/guide/using-middleware.html
+  * https://expressjs.com/en/guide/routing.html
+  * https://www.npmjs.com/package/express-session
+  * https://www.npmjs.com/package/connect-session-sequelize
+  * https://beta.openai.com/docs/
 
-You are required to submit BOTH of the following for review:
 
-* The URL of the functional, deployed application.
+## License
+MIT License
 
-* The URL of the GitHub repository, with a unique name and a readme describing the project.
+## Badges
+  * [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
----
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+  * ![JavaScript](https://img.shields.io/badge/JavaScript-42%-yellow) 
+  
+  * ![Handlebars](https://img.shields.io/badge/Handlebars-40%-orange) 
+
+  * ![HTML](https://img.shields.io/badge/HTML-13%-red) 
+  
+  * ![CSS](https://img.shields.io/badge/CSS-5%-purple)
+
+## Features
+  * Auto logout after 15 minutes of no activity
+
+  * Create an account
+
+  * Users can easily manage all of their posts & replies in their personal dashboard
+
+  * Users can post, reply to posts, and edit and delete all posts and replies for which they are the owner.
+
+  * Users can review their replies to other posts by scrolling over the post titles and dates. Users can view the post content by clicking on the post title.
+  
+  * Future feature: Once a user sends a message it gets run through generative AI to reconstruct (recycle) their trash talk into a more thoughtful, polite, and constructive manner.
+
+
+## How to Contribute
+Contributions to the Trash Talk application are encouraged and can be made by forking the repository on GitHub, creating a new branch, making changes to enhance functionality, and submitting a pull request. The maintainers will review the changes, provide feedback if needed, and merge approved contributions into the main branch. This collaborative process allows contributors to actively improve the Note Taker application and make it more valuable for users.
+
+## Questions 
+If you have any questions about the content, instructions, or how to get involved in this project, please contact: 
+
+  * Jimmy O'Brien    
+    GitHub Username: [jimmyjr77](https://github.com/jimmyjr77/)    
+    Email Address: jimmyjr.obrien@gmail.com    
