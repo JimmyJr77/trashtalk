@@ -1,3 +1,8 @@
+function init() {
+    $('#login-form').on('submit', handleLogin);
+    $('#signup-form').on('submit', handleSignup);
+}
+
 async function handleLogin(event) {
     event.preventDefault();
 

@@ -27,9 +27,12 @@ const hbs = exphbs.create({
 // Configured and linked session object with the sequelize store
 const sess = {
   secret: bcrypt.hashSync(process.env.SESSION_SECRET, 10),
-  cookie: {},
+  cookie: {
+    maxAge: 15 * 60 * 1000  // 15 minute time-out feature
+  },
   resave: false,
   saveUninitialized: true,
+  rolling: true,  // Reset the session expiry time on each request
   store: new SequelizeStore({
     db: sequelize,
   }),
@@ -42,7 +45,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 app.use('/api', apiRoutes);
-// app.use('/api/users', logoutRoute);
 
 // Sets the view engine to use Handlebars
 app.engine('handlebars', hbs.engine);

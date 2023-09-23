@@ -1,35 +1,5 @@
-let logoutTimer;
-
 function init() {
-    // Login and signup event bindings
-    $('.error-message').hide();
-    $('#login-form').on('submit', handleLogin);
-    $('#signup-form').on('submit', handleSignup);
-
-    // Logout event binding
     $('.btn-logout').on('click', handleLogout);
-
-    // Start the logout timer if the user is authenticated
-    // (you'll need to define the isAuthenticated() function or replace it with your authentication check)
-    if (isAuthenticated()) {
-        startLogoutTimer();
-    }
-}
-
-function isAuthenticated() {
-    return $('.btn-logout').length > 0;
-}
-
-function startLogoutTimer() {
-    // Clear any existing timers
-    if (logoutTimer) {
-        clearTimeout(logoutTimer);
-    }
-
-    // 15 minutes = 15 * 60 * 1000 milliseconds
-    logoutTimer = setTimeout(function() {
-        handleLogout({ preventDefault: () => {} });
-    }, 15 * 60 * 1000);
 }
 
 async function handleLogout(event) {
@@ -39,30 +9,16 @@ async function handleLogout(event) {
         method: 'POST'
     });
     
-    if (response.ok) {
-        // After logging out, revert the UI to the logged-out state
-        $('#btn-login').show();
-        $('.btn-logout').remove();
+    const responseData = await response.json();
 
+    if (response.ok) {
+        alert(responseData.message);  // Displays the message "You are now logged out!" (from user-routes.js)
         location.assign('/');
         return;
+    } else {
+        const { message } = await response.json();
+        console.error(message);
     }
-
-    const { message } = await response.json();
-    console.error(message);
 }
 
-const auth = (req, res, next) => {
-    if (!req.session.loggedIn) {
-        res.redirect('/');
-        return;
-    }
-    next();
-}
-
-// Reset the logout timer whenever there's an action
-document.addEventListener('click', startLogoutTimer);
-document.addEventListener('mousemove', startLogoutTimer);
-document.addEventListener('keypress', startLogoutTimer);
-
-$(init);
+init();
