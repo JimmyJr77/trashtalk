@@ -45,6 +45,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 app.use('/api', apiRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
 
 // Sets the view engine to use Handlebars
 app.engine('handlebars', hbs.engine);
