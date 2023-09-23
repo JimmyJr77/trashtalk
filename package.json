@@ -15,7 +15,8 @@
     "sequelize": "^6.33.0"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed": "node seeds/seed.js"
   },
   "name": "challenge14",
   "description": "## Your Task",
